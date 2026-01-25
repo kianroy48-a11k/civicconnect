@@ -29,6 +29,7 @@ const CATEGORIES = [
   { id: 'Water', icon: '💧', label: 'Water', description: 'Leaks, flooding, contamination' },
   { id: 'Road', icon: '🛣️', label: 'Road', description: 'Potholes, damage, blockage' },
   { id: 'Safety', icon: '⚠️', label: 'Safety', description: 'Streetlights, hazards' },
+  { id: 'Parks', icon: '🌳', label: 'Parks & Greenery', description: 'Trees, parks, gardens' },
   { id: 'Other', icon: '📋', label: 'Other', description: 'Other civic issues' }
 ];
 
@@ -37,7 +38,8 @@ const TAGS_BY_CATEGORY = {
   Water: ['Leak', 'Flooding', 'Contamination', 'Low Pressure', 'Broken Pipe', 'Sewage'],
   Road: ['Pothole', 'Crack', 'Blockage', 'Missing Sign', 'Faded Markings', 'Construction'],
   Safety: ['Broken Streetlight', 'Unsafe Structure', 'Missing Guardrail', 'Electrical Hazard'],
-  Other: ['Public Property', 'Parks', 'Noise', 'Encroachment', 'Other']
+  Parks: ['Tree Cutting', 'Overgrown', 'Broken Equipment', 'Park Maintenance', 'Garden Neglect'],
+  Other: ['Public Property', 'Noise', 'Encroachment', 'Other']
 };
 
 const BANNED_WORDS = ['threat', 'kill', 'attack', 'bomb'];
@@ -226,7 +228,7 @@ export default function ReportIssue() {
                 <h2 className="text-2xl font-bold text-[#29136C] mb-2">What type of issue?</h2>
                 <p className="text-gray-500 mb-6">Select the category that best describes the problem</p>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {CATEGORIES.map((cat) => (
                     <button
                       key={cat.id}
@@ -264,10 +266,12 @@ export default function ReportIssue() {
                     type="button"
                     onClick={detectLocation}
                     disabled={locationLoading}
-                    variant={formData.latitude ? "secondary" : "default"}
+                    variant="outline"
                     className={cn(
-                      "w-full justify-start gap-3 h-14",
-                      formData.latitude ? "bg-emerald-50 text-emerald-700 border-emerald-200" : ""
+                      "w-full justify-start gap-3 h-14 border-2",
+                      formData.latitude 
+                        ? "bg-emerald-50 text-emerald-700 border-emerald-500" 
+                        : "border-[#4729A3] text-[#4729A3] hover:bg-[#4729A3]/10"
                     )}
                   >
                     {locationLoading ? (

@@ -101,7 +101,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link to={createPageUrl('IssueMap')}>
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 font-semibold px-8">
+                <Button size="lg" className="bg-[#4729A3] text-white hover:bg-[#29136C] border-2 border-white/30 font-semibold px-8">
                   <MapPin className="w-5 h-5 mr-2" />
                   View Map
                 </Button>
