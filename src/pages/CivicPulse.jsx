@@ -98,9 +98,9 @@ export default function CivicPulse() {
   const topTrending = sortedIssues.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
       {/* Header */}
-      <div className="bg-gradient-to-br from-emerald-900 via-emerald-700 to-emerald-600 text-white">
+      <div className="bg-gradient-to-br from-blue-900 via-blue-700 to-blue-600 dark:from-slate-800 dark:via-slate-700 dark:to-slate-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex items-center gap-4 mb-6">
             <div className="p-4 bg-white/10 backdrop-blur-sm rounded-2xl animate-pulse">
@@ -145,8 +145,8 @@ export default function CivicPulse() {
         {filter === 'trending' && topTrending.length > 0 && (
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
-              <Flame className="w-6 h-6 text-orange-500" />
-              <h2 className="text-xl font-bold text-emerald-950">Hot Right Now</h2>
+            <Flame className="w-6 h-6 text-orange-500" />
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">Hot Right Now</h2>
             </div>
             <div className="grid md:grid-cols-3 gap-4">
               {topTrending.map((issue, index) => (
@@ -160,7 +160,7 @@ export default function CivicPulse() {
                   <div className="absolute -top-2 -left-2 z-10 w-8 h-8 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
                     {index + 1}
                   </div>
-                  <div className="absolute top-2 right-2 z-10 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold text-emerald-700 flex items-center gap-1">
+                  <div className="absolute top-2 right-2 z-10 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold text-blue-600 flex items-center gap-1">
                     <Zap className="w-3 h-3" />
                     {issue.calculatedPulseScore}
                   </div>
@@ -173,7 +173,7 @@ export default function CivicPulse() {
 
         {/* Filters */}
         <div className="flex flex-wrap items-center gap-4 mb-6">
-          <div className="flex items-center bg-white rounded-xl border border-emerald-200/50 p-1 overflow-x-auto">
+          <div className="flex items-center bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 p-1 overflow-x-auto">
             {[
               { id: 'trending', label: 'Trending', icon: TrendingUp },
               { id: 'urgent', label: 'Urgent', icon: AlertTriangle },
@@ -186,8 +186,8 @@ export default function CivicPulse() {
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap",
                   filter === item.id 
-                    ? "bg-emerald-700 text-white" 
-                    : "text-gray-600 hover:bg-gray-100"
+                    ? "bg-blue-600 text-white" 
+                    : "text-gray-600 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700"
                 )}
               >
                 <item.icon className="w-4 h-4" />
@@ -235,7 +235,7 @@ export default function CivicPulse() {
                 transition={{ delay: Math.min(index * 0.05, 0.5) }}
                 className="relative"
               >
-                <div className="absolute top-2 right-2 z-10 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold text-emerald-700 flex items-center gap-1">
+                <div className="absolute top-2 right-2 z-10 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold text-blue-600 flex items-center gap-1">
                   <Zap className="w-3 h-3" />
                   {issue.calculatedPulseScore}
                 </div>
@@ -248,7 +248,7 @@ export default function CivicPulse() {
         {/* Load More (placeholder) */}
         {sortedIssues.length > 12 && (
           <div className="text-center mt-8">
-            <Button variant="outline" className="border-emerald-700 text-emerald-700 hover:bg-emerald-50">
+            <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-800">
               Load More Issues
             </Button>
           </div>

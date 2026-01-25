@@ -99,9 +99,9 @@ export default function Leaderboard() {
   const topThree = filteredLeaders.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
       {/* Header */}
-      <div className="bg-gradient-to-br from-emerald-800 via-emerald-700 to-emerald-600 text-white">
+      <div className="bg-gradient-to-br from-blue-900 via-blue-700 to-blue-600 dark:from-slate-800 dark:via-slate-700 dark:to-slate-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex items-center gap-4 mb-8">
             <div className="p-4 bg-white/10 backdrop-blur-sm rounded-2xl">

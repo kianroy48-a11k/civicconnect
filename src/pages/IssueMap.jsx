@@ -135,28 +135,28 @@ export default function IssueMap() {
   }, [filteredIssues]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
       {/* Header */}
-      <div className="bg-white border-b border-emerald-200/50 sticky top-16 z-40">
+      <div className="bg-white dark:bg-slate-900 border-b border-slate-200/50 dark:border-slate-700/50 sticky top-16 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             {/* Title & Stats */}
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-emerald-100 rounded-xl">
-                <MapPin className="w-6 h-6 text-emerald-700" />
+              <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
+                <MapPin className="w-6 h-6 text-blue-600 dark:text-blue-400" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-emerald-950">Accountability Map</h1>
+                <h1 className="text-xl font-bold text-slate-900 dark:text-white">Accountability Map</h1>
                 <div className="flex items-center gap-4 text-sm">
-                  <span className="text-gray-500">{stats.total} issues</span>
-                  <span className="flex items-center gap-1 text-emerald-600">
+                  <span className="text-gray-500 dark:text-slate-400">{stats.total} issues</span>
+                  <span className="flex items-center gap-1 text-green-600 dark:text-green-400">
                     <CheckCircle className="w-3 h-3" /> {stats.resolved}
                   </span>
-                  <span className="flex items-center gap-1 text-amber-600">
+                  <span className="flex items-center gap-1 text-amber-600 dark:text-amber-400">
                     <Clock className="w-3 h-3" /> {stats.inProgress}
                   </span>
                   {stats.overdue > 0 && (
-                    <span className="flex items-center gap-1 text-red-600">
+                    <span className="flex items-center gap-1 text-red-600 dark:text-red-400">
                       <Flame className="w-3 h-3" /> {stats.overdue} overdue
                     </span>
                   )}
@@ -198,7 +198,7 @@ export default function IssueMap() {
                   onClick={() => setViewMode('pins')}
                   className={cn(
                     "px-3 py-1.5 rounded text-sm font-medium transition-all",
-                    viewMode === 'pins' ? "bg-emerald-700 text-white" : "text-gray-600 hover:bg-gray-100"
+                    viewMode === 'pins' ? "bg-blue-600 text-white" : "text-gray-600 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700"
                   )}
                 >
                   <Eye className="w-4 h-4 inline mr-1" />
@@ -208,7 +208,7 @@ export default function IssueMap() {
                   onClick={() => setViewMode('heatmap')}
                   className={cn(
                     "px-3 py-1.5 rounded text-sm font-medium transition-all",
-                    viewMode === 'heatmap' ? "bg-emerald-700 text-white" : "text-gray-600 hover:bg-gray-100"
+                    viewMode === 'heatmap' ? "bg-blue-600 text-white" : "text-gray-600 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700"
                   )}
                 >
                   <Layers className="w-4 h-4 inline mr-1" />
@@ -231,7 +231,7 @@ export default function IssueMap() {
             center={INDIA_CENTER}
             zoom={5}
             className="h-full w-full z-0"
-            style={{ background: '#f0fdf4' }}
+            style={{ background: '#f8fafc' }}
             maxBounds={INDIA_BOUNDS}
             maxBoundsViscosity={1.0}
             minZoom={5}
@@ -266,7 +266,7 @@ export default function IssueMap() {
                         <CategoryBadge category={issue.category} size="sm" />
                         <SeverityBadge severity={issue.severity} size="sm" />
                       </div>
-                      <h3 className="font-semibold text-emerald-950 mb-1">{issue.title}</h3>
+                      <h3 className="font-semibold text-slate-900 mb-1">{issue.title}</h3>
                       <p className="text-sm text-gray-500 mb-2 line-clamp-2">{issue.description}</p>
                       <div className="flex items-center justify-between">
                         <StatusBadge status={issue.status} size="sm" />
@@ -313,7 +313,7 @@ export default function IssueMap() {
                             <Link 
                               key={issue.id}
                               to={createPageUrl(`IssueDetail?id=${issue.id}`)}
-                              className="block text-xs text-emerald-700 hover:underline"
+                              className="block text-xs text-blue-600 hover:underline"
                               >
                               • {issue.title}
                             </Link>

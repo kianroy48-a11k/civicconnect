@@ -185,7 +185,7 @@ export default function ReportIssue() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#EEEBFA] to-white py-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 py-8">
       <div className="max-w-2xl mx-auto px-4">
         {/* Progress Steps */}
         <div className="flex items-center justify-center gap-2 mb-8">
@@ -194,8 +194,8 @@ export default function ReportIssue() {
               <div className={cn(
                 "w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all duration-300",
                 step >= s 
-                  ? "bg-[#4729A3] text-white" 
-                  : "bg-white text-gray-400 border-2 border-gray-200"
+                  ? "bg-blue-600 text-white" 
+                  : "bg-white dark:bg-slate-800 text-gray-400 border-2 border-gray-200 dark:border-slate-600"
               )}>
                 {step > s ? <CheckCircle className="w-5 h-5" /> : s}
               </div>
@@ -215,7 +215,7 @@ export default function ReportIssue() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
-          className="bg-white rounded-3xl shadow-xl p-6 md:p-8 border border-[#4729A3]/10"
+          className="bg-white dark:bg-slate-900 rounded-3xl shadow-xl p-6 md:p-8 border border-slate-200 dark:border-slate-700"
         >
           <AnimatePresence mode="wait">
             {/* Step 1: Category */}
@@ -225,8 +225,8 @@ export default function ReportIssue() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <h2 className="text-2xl font-bold text-[#29136C] mb-2">What type of issue?</h2>
-                <p className="text-gray-500 mb-6">Select the category that best describes the problem</p>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">What type of issue?</h2>
+                <p className="text-gray-500 dark:text-slate-400 mb-6">Select the category that best describes the problem</p>
                 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {CATEGORIES.map((cat) => (
@@ -236,13 +236,13 @@ export default function ReportIssue() {
                       className={cn(
                         "p-6 rounded-2xl border-2 text-left transition-all duration-300",
                         formData.category === cat.id
-                          ? "border-[#4729A3] bg-[#4729A3]/5 shadow-lg"
-                          : "border-gray-200 hover:border-[#4729A3]/50 hover:bg-gray-50"
+                          ? "border-blue-600 bg-blue-50 dark:bg-blue-900/20 shadow-lg"
+                          : "border-gray-200 dark:border-slate-600 hover:border-blue-400 hover:bg-gray-50 dark:hover:bg-slate-800"
                       )}
                     >
                       <span className="text-4xl mb-3 block">{cat.icon}</span>
-                      <h3 className="font-semibold text-[#29136C]">{cat.label}</h3>
-                      <p className="text-sm text-gray-500 mt-1">{cat.description}</p>
+                      <h3 className="font-semibold text-slate-900 dark:text-white">{cat.label}</h3>
+                      <p className="text-sm text-gray-500 dark:text-slate-400 mt-1">{cat.description}</p>
                     </button>
                   ))}
                 </div>
@@ -256,12 +256,12 @@ export default function ReportIssue() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <h2 className="text-2xl font-bold text-[#29136C] mb-2">Location & Media</h2>
-                <p className="text-gray-500 mb-6">Help us pinpoint the issue</p>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Location & Media</h2>
+                <p className="text-gray-500 dark:text-slate-400 mb-6">Help us pinpoint the issue</p>
 
                 {/* Location */}
                 <div className="mb-6">
-                  <Label className="text-sm font-medium text-gray-700 mb-2 block">Location</Label>
+                  <Label className="text-sm font-medium text-gray-700 dark:text-slate-300 mb-2 block">Location</Label>
                   <Button
                     type="button"
                     onClick={detectLocation}
@@ -270,8 +270,8 @@ export default function ReportIssue() {
                     className={cn(
                       "w-full justify-start gap-3 h-14 border-2",
                       formData.latitude 
-                        ? "bg-emerald-50 text-emerald-700 border-emerald-500" 
-                        : "border-[#4729A3] text-[#4729A3] hover:bg-[#4729A3]/10"
+                        ? "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border-green-500 dark:border-green-600" 
+                        : "border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20"
                     )}
                   >
                     {locationLoading ? (
@@ -298,7 +298,7 @@ export default function ReportIssue() {
 
                 {/* Photo Upload */}
                 <div className="mb-6">
-                  <Label className="text-sm font-medium text-gray-700 mb-2 block">Photo Evidence</Label>
+                  <Label className="text-sm font-medium text-gray-700 dark:text-slate-300 mb-2 block">Photo Evidence</Label>
                   {formData.photoPreview ? (
                     <div className="relative">
                       <img 
@@ -329,7 +329,7 @@ export default function ReportIssue() {
 
                 {/* Optional Meme */}
                 <div>
-                  <Label className="text-sm font-medium text-gray-700 mb-2 block flex items-center gap-2">
+                  <Label className="text-sm font-medium text-gray-700 dark:text-slate-300 mb-2 block flex items-center gap-2">
                     <Image className="w-4 h-4" />
                     Optional Meme/GIF
                     <Badge variant="secondary" className="text-xs">Gen-Z Approved 😎</Badge>
@@ -371,12 +371,12 @@ export default function ReportIssue() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <h2 className="text-2xl font-bold text-[#29136C] mb-2">Specific Details</h2>
-                <p className="text-gray-500 mb-6">Help categorize and prioritize this issue</p>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Specific Details</h2>
+                <p className="text-gray-500 dark:text-slate-400 mb-6">Help categorize and prioritize this issue</p>
 
                 {/* Tags */}
                 <div className="mb-8">
-                  <Label className="text-sm font-medium text-gray-700 mb-3 block">Tags (select all that apply)</Label>
+                  <Label className="text-sm font-medium text-gray-700 dark:text-slate-300 mb-3 block">Tags (select all that apply)</Label>
                   <div className="flex flex-wrap gap-2">
                     {(TAGS_BY_CATEGORY[formData.category] || []).map((tag) => (
                       <button
@@ -392,8 +392,8 @@ export default function ReportIssue() {
                         className={cn(
                           "px-4 py-2 rounded-full border-2 font-medium transition-all duration-200",
                           formData.tags.includes(tag)
-                            ? "border-[#4729A3] bg-[#4729A3] text-white"
-                            : "border-gray-200 text-gray-600 hover:border-[#4729A3]/50"
+                            ? "border-blue-600 bg-blue-600 text-white"
+                            : "border-gray-200 dark:border-slate-600 text-gray-600 dark:text-slate-300 hover:border-blue-400"
                         )}
                       >
                         {tag}
@@ -404,7 +404,7 @@ export default function ReportIssue() {
 
                 {/* Severity */}
                 <div>
-                  <Label className="text-sm font-medium text-gray-700 mb-3 block">Severity Level</Label>
+                  <Label className="text-sm font-medium text-gray-700 dark:text-slate-300 mb-3 block">Severity Level</Label>
                   <div className="grid grid-cols-4 gap-2">
                     {['Low', 'Medium', 'High', 'Critical'].map((level) => (
                       <button
@@ -420,7 +420,7 @@ export default function ReportIssue() {
                                 : level === 'Medium'
                                   ? "border-amber-500 bg-amber-500 text-white"
                                   : "border-blue-500 bg-blue-500 text-white"
-                            : "border-gray-200 text-gray-600 hover:border-gray-300"
+                            : "border-gray-200 dark:border-slate-600 text-gray-600 dark:text-slate-300 hover:border-gray-300"
                         )}
                       >
                         {level}
@@ -438,12 +438,12 @@ export default function ReportIssue() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <h2 className="text-2xl font-bold text-[#29136C] mb-2">Final Details</h2>
-                <p className="text-gray-500 mb-6">Add a title and description</p>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Final Details</h2>
+                <p className="text-gray-500 dark:text-slate-400 mb-6">Add a title and description</p>
 
                 <div className="space-y-4">
                   <div>
-                    <Label htmlFor="title" className="text-sm font-medium text-gray-700">Title *</Label>
+                    <Label htmlFor="title" className="text-sm font-medium text-gray-700 dark:text-slate-300">Title *</Label>
                     <Input
                       id="title"
                       placeholder="Brief title for this issue"
@@ -454,7 +454,7 @@ export default function ReportIssue() {
                   </div>
 
                   <div>
-                    <Label htmlFor="description" className="text-sm font-medium text-gray-700">Description</Label>
+                    <Label htmlFor="description" className="text-sm font-medium text-gray-700 dark:text-slate-300">Description</Label>
                     <Textarea
                       id="description"
                       placeholder="Describe the issue in detail..."
@@ -464,10 +464,10 @@ export default function ReportIssue() {
                     />
                   </div>
 
-                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                  <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-800 rounded-xl">
                     <div>
-                      <p className="font-medium text-gray-700">Report Anonymously</p>
-                      <p className="text-sm text-gray-500">Your identity will be hidden</p>
+                      <p className="font-medium text-gray-700 dark:text-slate-200">Report Anonymously</p>
+                      <p className="text-sm text-gray-500 dark:text-slate-400">Your identity will be hidden</p>
                     </div>
                     <Switch
                       checked={formData.is_anonymous}
@@ -477,9 +477,9 @@ export default function ReportIssue() {
                 </div>
 
                 {/* Summary */}
-                <div className="mt-6 p-4 bg-[#4729A3]/5 rounded-xl border border-[#4729A3]/20">
-                  <h4 className="font-semibold text-[#29136C] mb-2">Summary</h4>
-                  <div className="space-y-1 text-sm text-gray-600">
+                <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
+                  <h4 className="font-semibold text-slate-900 dark:text-white mb-2">Summary</h4>
+                  <div className="space-y-1 text-sm text-gray-600 dark:text-slate-300">
                     <p><strong>Category:</strong> {formData.category}</p>
                     <p><strong>Severity:</strong> {formData.severity}</p>
                     <p><strong>Tags:</strong> {formData.tags.join(', ')}</p>
@@ -509,7 +509,7 @@ export default function ReportIssue() {
               <Button
                 onClick={() => setStep(s => s + 1)}
                 disabled={!canProceed()}
-                className="bg-[#4729A3] hover:bg-[#29136C]"
+                className="bg-blue-600 hover:bg-blue-700"
               >
                 Continue
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -518,7 +518,7 @@ export default function ReportIssue() {
               <Button
                 onClick={handleSubmit}
                 disabled={isSubmitting || !canProceed()}
-                className="bg-[#4729A3] hover:bg-[#29136C] min-w-[140px]"
+                className="bg-blue-600 hover:bg-blue-700 min-w-[140px]"
               >
                 {isSubmitting ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
