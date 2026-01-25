@@ -43,6 +43,7 @@ export default function IssueDetail() {
   const [verifyComment, setVerifyComment] = useState('');
   const [showAssignForm, setShowAssignForm] = useState(false);
   const [selectedLeaderId, setSelectedLeaderId] = useState('');
+  const [showResolveForm, setShowResolveForm] = useState(false);
 
   useEffect(() => {
     base44.auth.me().then(setUser).catch(() => {});
