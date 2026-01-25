@@ -24,6 +24,7 @@ export default function Layout({ children, currentPageName }) {
     { name: 'Home', icon: Home, page: 'Home' },
     { name: 'Map', icon: MapPin, page: 'IssueMap' },
     { name: 'Leaderboard', icon: Users, page: 'Leaderboard' },
+    { name: 'Civic Pulse', icon: TrendingUp, page: 'CivicPulse' },
     { name: 'Profile', icon: User, page: 'Profile' },
   ];
 
