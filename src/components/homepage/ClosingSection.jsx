@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '../../utils';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { TrendingUp, BarChart3 } from 'lucide-react';
+import { TrendingUp } from 'lucide-react';
 
 export default function ClosingSection() {
   return (
@@ -37,12 +37,6 @@ export default function ClosingSection() {
               <Button className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-6 text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all">
                 <TrendingUp className="w-5 h-5 mr-2" />
                 Start Tracking Issues
-              </Button>
-            </Link>
-            <Link to={createPageUrl('Leaderboard')}>
-              <Button variant="outline" className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg rounded-xl transition-all">
-                <BarChart3 className="w-5 h-5 mr-2" />
-                View Accountability Dashboard
               </Button>
             </Link>
           </div>
