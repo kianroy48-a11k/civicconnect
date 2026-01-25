@@ -269,23 +269,25 @@ export default function ReportIssue() {
                     disabled={locationLoading}
                     variant="outline"
                     className={cn(
-                      "w-full justify-start gap-3 h-14 border-2",
+                      "w-full justify-start gap-3 h-14 border-2 overflow-hidden",
                       formData.latitude 
                         ? "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border-green-500 dark:border-green-600" 
                         : "border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20"
                     )}
                   >
                     {locationLoading ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <Loader2 className="w-5 h-5 animate-spin flex-shrink-0" />
                     ) : formData.latitude ? (
-                      <CheckCircle className="w-5 h-5" />
+                      <CheckCircle className="w-5 h-5 flex-shrink-0" />
                     ) : (
-                      <MapPin className="w-5 h-5" />
+                      <MapPin className="w-5 h-5 flex-shrink-0" />
                     )}
-                    {formData.latitude 
-                      ? (formData.address || `${formData.latitude.toFixed(4)}, ${formData.longitude.toFixed(4)}`)
-                      : 'Detect My Location'
-                    }
+                    <span className="truncate text-left">
+                      {formData.latitude 
+                        ? (formData.address || `${formData.latitude.toFixed(4)}, ${formData.longitude.toFixed(4)}`)
+                        : 'Detect My Location'
+                      }
+                    </span>
                   </Button>
                   {formData.latitude && (
                     <Input
