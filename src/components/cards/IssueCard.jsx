@@ -7,6 +7,7 @@ import { formatDistanceToNow, isPast } from 'date-fns';
 import { cn } from '@/lib/utils';
 
 export default function IssueCard({ issue, compact = false }) {
+  const [imageError, setImageError] = React.useState(false);
   const isOverdue = issue.sla_deadline && isPast(new Date(issue.sla_deadline)) && issue.status !== 'Resolved';
   const timeAgo = formatDistanceToNow(new Date(issue.created_date), { addSuffix: true });
 
@@ -17,12 +18,17 @@ export default function IssueCard({ issue, compact = false }) {
         className="block bg-white rounded-xl p-4 border border-[#4729A3]/10 hover:border-[#4729A3]/30 hover:shadow-lg transition-all duration-300"
       >
         <div className="flex items-start gap-3">
-          {issue.photo && (
+          {issue.photo && !imageError ? (
             <img 
               src={issue.photo} 
               alt={issue.title}
               className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
+              onError={() => setImageError(true)}
             />
+          ) : (
+            <div className="w-16 h-16 rounded-lg bg-[#4729A3]/10 flex items-center justify-center text-3xl flex-shrink-0">
+              {issue.category === 'Garbage' ? '🗑️' : issue.category === 'Water' ? '💧' : issue.category === 'Road' ? '🛣️' : issue.category === 'Safety' ? '⚠️' : issue.category === 'Parks' ? '🌳' : '📋'}
+            </div>
           )}
           <div className="flex-1 min-w-0">
             <h4 className="font-semibold text-[#29136C] truncate">{issue.title}</h4>
@@ -51,14 +57,31 @@ export default function IssueCard({ issue, compact = false }) {
       )}
     >
       {/* Image */}
-      {issue.photo && (
+      {issue.photo && !imageError ? (
         <div className="relative h-48 overflow-hidden">
           <img 
             src={issue.photo} 
             alt={issue.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            onError={() => setImageError(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+            <CategoryBadge category={issue.category} />
+            <SeverityBadge severity={issue.severity} />
+          </div>
+          {isOverdue && (
+            <div className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 animate-pulse">
+              <AlertTriangle className="w-3 h-3" />
+              SLA Overdue
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-[#4729A3]/10 to-[#8B70DB]/10 flex items-center justify-center">
+          <div className="text-7xl">
+            {issue.category === 'Garbage' ? '🗑️' : issue.category === 'Water' ? '💧' : issue.category === 'Road' ? '🛣️' : issue.category === 'Safety' ? '⚠️' : issue.category === 'Parks' ? '🌳' : '📋'}
+          </div>
           <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
             <CategoryBadge category={issue.category} />
             <SeverityBadge severity={issue.severity} />
