@@ -226,6 +226,13 @@ export default function IssueCard({ issue, compact = false, leaders = [] }) {
             )}
           </div>
         )}
+        
+        {/* Transparency Note */}
+        {issue.contract_activated && (
+          <p className="text-xs text-gray-400 mb-4 italic">
+            This is a prototype smart contract simulation for public accountability.
+          </p>
+        )}
 
         <div className="flex items-center justify-between">
           <StatusBadge status={issue.status} size="sm" />
