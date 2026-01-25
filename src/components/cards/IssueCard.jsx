@@ -69,6 +69,8 @@ export default function IssueCard({ issue, compact = false }) {
     repostMutation.mutate();
   };
 
+  const hasReposted = user && reposts.some(r => r.user_email === user?.email);
+
   if (compact) {
     return (
       <Link 
@@ -222,10 +224,33 @@ export default function IssueCard({ issue, compact = false }) {
           <span className="text-xs text-gray-400">
             {issue.is_anonymous ? 'Anonymous' : issue.reporter_name || 'Community Member'}
           </span>
-          <span className="text-xs text-gray-400 flex items-center gap-1">
-            <Clock className="w-3 h-3" />
-            {timeAgo}
-          </span>
+          <div className="flex items-center gap-2">
+            {issue.status !== 'Resolved' && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleRepost}
+                disabled={repostMutation.isPending}
+                className={cn(
+                  "h-6 px-2 gap-1 text-xs",
+                  hasReposted 
+                    ? "text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50" 
+                    : "text-gray-500 hover:text-[#4729A3] hover:bg-[#4729A3]/10"
+                )}
+              >
+                {repostMutation.isPending ? (
+                  <Loader2 className="w-3 h-3 animate-spin" />
+                ) : (
+                  <Repeat2 className="w-3 h-3" />
+                )}
+                {issue.repost_count || 0}
+              </Button>
+            )}
+            <span className="text-xs text-gray-400 flex items-center gap-1">
+              <Clock className="w-3 h-3" />
+              {timeAgo}
+            </span>
+          </div>
         </div>
       </div>
     </Link>
