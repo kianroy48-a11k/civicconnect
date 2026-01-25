@@ -23,11 +23,14 @@ import {
   Loader2,
   Calendar,
   User,
-  UserPlus
+  UserPlus,
+  AlertCircle,
+  CheckCircle2
 } from 'lucide-react';
 import { format, formatDistanceToNow, isPast, differenceInHours } from 'date-fns';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { getContractStatus, isContractBreached, canResolveContract, getContractColor } from '../components/SmartContractLogic';
 
 export default function IssueDetail() {
   const queryClient = useQueryClient();
