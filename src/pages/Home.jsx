@@ -26,10 +26,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const hasSeenOnboarding = localStorage.getItem('civic_audit_onboarding_completed');
-    if (!hasSeenOnboarding) {
-      setShowOnboarding(true);
-    }
+    setShowOnboarding(true);
   }, []);
 
   const { data: issues = [], isLoading } = useQuery({
