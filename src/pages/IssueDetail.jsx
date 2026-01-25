@@ -150,7 +150,7 @@ export default function IssueDetail() {
     mutationFn: async () => {
       await base44.entities.Issue.update(issueId, {
         assigned_leader_id: selectedLeaderId,
-        status: issue.status === 'Reported' ? 'Verified' : issue.status
+        status: issue?.status === 'Reported' ? 'Verified' : issue?.status
       });
 
       // Update leader stats
@@ -166,6 +166,19 @@ export default function IssueDetail() {
       queryClient.invalidateQueries(['leader', selectedLeaderId]);
       setShowAssignForm(false);
       setSelectedLeaderId('');
+    }
+  });
+
+  const resolveContractMutation = useMutation({
+    mutationFn: async () => {
+      await base44.entities.Issue.update(issueId, {
+        contract_status: 'Resolved',
+        status: 'Resolved'
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['issue', issueId]);
+      setShowResolveForm(false);
     }
   });
 
