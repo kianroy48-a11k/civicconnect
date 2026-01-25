@@ -29,7 +29,7 @@ import 'leaflet/dist/leaflet.css';
 
 const STATUS_COLORS = {
   Reported: '#3B82F6',
-  Verified: '#8B70DB',
+  Verified: '#059669',
   'In Progress': '#F59E0B',
   Resolved: '#10B981'
 };
@@ -135,18 +135,18 @@ export default function IssueMap() {
   }, [filteredIssues]);
 
   return (
-    <div className="min-h-screen bg-[#EEEBFA]">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
       {/* Header */}
-      <div className="bg-white border-b border-[#4729A3]/10 sticky top-16 z-40">
+      <div className="bg-white border-b border-emerald-200/50 sticky top-16 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             {/* Title & Stats */}
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-[#4729A3]/10 rounded-xl">
-                <MapPin className="w-6 h-6 text-[#4729A3]" />
+              <div className="p-3 bg-emerald-100 rounded-xl">
+                <MapPin className="w-6 h-6 text-emerald-700" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-[#29136C]">Accountability Map</h1>
+                <h1 className="text-xl font-bold text-emerald-950">Accountability Map</h1>
                 <div className="flex items-center gap-4 text-sm">
                   <span className="text-gray-500">{stats.total} issues</span>
                   <span className="flex items-center gap-1 text-emerald-600">
@@ -198,7 +198,7 @@ export default function IssueMap() {
                   onClick={() => setViewMode('pins')}
                   className={cn(
                     "px-3 py-1.5 rounded text-sm font-medium transition-all",
-                    viewMode === 'pins' ? "bg-[#4729A3] text-white" : "text-gray-600 hover:bg-gray-100"
+                    viewMode === 'pins' ? "bg-emerald-700 text-white" : "text-gray-600 hover:bg-gray-100"
                   )}
                 >
                   <Eye className="w-4 h-4 inline mr-1" />
@@ -208,7 +208,7 @@ export default function IssueMap() {
                   onClick={() => setViewMode('heatmap')}
                   className={cn(
                     "px-3 py-1.5 rounded text-sm font-medium transition-all",
-                    viewMode === 'heatmap' ? "bg-[#4729A3] text-white" : "text-gray-600 hover:bg-gray-100"
+                    viewMode === 'heatmap' ? "bg-emerald-700 text-white" : "text-gray-600 hover:bg-gray-100"
                   )}
                 >
                   <Layers className="w-4 h-4 inline mr-1" />
@@ -224,17 +224,18 @@ export default function IssueMap() {
       <div className="relative h-[calc(100vh-180px)]">
         {isLoading ? (
           <div className="absolute inset-0 flex items-center justify-center bg-white">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#4729A3] border-t-transparent" />
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-emerald-700 border-t-transparent" />
           </div>
         ) : (
           <MapContainer
-            center={mapCenter}
-            zoom={6}
+            center={INDIA_CENTER}
+            zoom={5}
             className="h-full w-full z-0"
-            style={{ background: '#EEEBFA' }}
+            style={{ background: '#f0fdf4' }}
             maxBounds={INDIA_BOUNDS}
             maxBoundsViscosity={1.0}
             minZoom={5}
+            maxZoom={18}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -265,7 +266,7 @@ export default function IssueMap() {
                         <CategoryBadge category={issue.category} size="sm" />
                         <SeverityBadge severity={issue.severity} size="sm" />
                       </div>
-                      <h3 className="font-semibold text-[#29136C] mb-1">{issue.title}</h3>
+                      <h3 className="font-semibold text-emerald-950 mb-1">{issue.title}</h3>
                       <p className="text-sm text-gray-500 mb-2 line-clamp-2">{issue.description}</p>
                       <div className="flex items-center justify-between">
                         <StatusBadge status={issue.status} size="sm" />
@@ -311,8 +312,8 @@ export default function IssueMap() {
                             <Link 
                               key={issue.id}
                               to={createPageUrl(`IssueDetail?id=${issue.id}`)}
-                              className="block text-xs text-[#4729A3] hover:underline"
-                            >
+                              className="block text-xs text-emerald-700 hover:underline"
+                              >
                               • {issue.title}
                             </Link>
                           ))}

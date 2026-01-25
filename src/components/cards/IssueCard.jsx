@@ -10,7 +10,7 @@ import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
-export default function IssueCard({ issue, compact = false }) {
+export default function IssueCard({ issue, compact = false, leaders = [] }) {
   const [imageError, setImageError] = React.useState(false);
   const [user, setUser] = React.useState(null);
   const queryClient = useQueryClient();
@@ -71,11 +71,17 @@ export default function IssueCard({ issue, compact = false }) {
 
   const hasReposted = user && reposts.some(r => r.user_email === user?.email);
 
+  // Get tagged leaders
+  const taggedLeaders = React.useMemo(() => {
+    if (!issue.tagged_leader_ids || !leaders.length) return [];
+    return leaders.filter(l => issue.tagged_leader_ids.includes(l.id));
+  }, [issue.tagged_leader_ids, leaders]);
+
   if (compact) {
     return (
       <Link 
         to={createPageUrl(`IssueDetail?id=${issue.id}`)}
-        className="block bg-white rounded-xl p-4 border border-[#4729A3]/10 hover:border-[#4729A3]/30 hover:shadow-lg transition-all duration-300"
+        className="block bg-white rounded-xl p-4 border border-emerald-200/50 hover:border-emerald-400 hover:shadow-lg transition-all duration-300"
       >
         <div className="flex items-start gap-3">
           {issue.photo && !imageError ? (
@@ -86,12 +92,12 @@ export default function IssueCard({ issue, compact = false }) {
               onError={() => setImageError(true)}
             />
           ) : (
-            <div className="w-16 h-16 rounded-lg bg-[#4729A3]/10 flex items-center justify-center text-3xl flex-shrink-0">
+            <div className="w-16 h-16 rounded-lg bg-emerald-100 flex items-center justify-center text-3xl flex-shrink-0">
               {issue.category === 'Garbage' ? '🗑️' : issue.category === 'Water' ? '💧' : issue.category === 'Road' ? '🛣️' : issue.category === 'Safety' ? '⚠️' : issue.category === 'Parks' ? '🌳' : '📋'}
             </div>
           )}
           <div className="flex-1 min-w-0">
-            <h4 className="font-semibold text-[#29136C] truncate">{issue.title}</h4>
+            <h4 className="font-semibold text-emerald-950 truncate">{issue.title}</h4>
             <div className="flex items-center gap-2 mt-1 text-sm text-gray-500">
               <CategoryBadge category={issue.category} size="sm" />
               <span className="flex items-center gap-1">
@@ -113,7 +119,7 @@ export default function IssueCard({ issue, compact = false }) {
         "group block bg-white rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-xl",
         isOverdue 
           ? "border-red-300 shadow-red-100" 
-          : "border-[#4729A3]/10 hover:border-[#4729A3]/30"
+          : "border-emerald-200/50 hover:border-emerald-400"
       )}
     >
       {/* Image */}
@@ -138,7 +144,7 @@ export default function IssueCard({ issue, compact = false }) {
           )}
         </div>
       ) : (
-        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-[#4729A3]/10 to-[#8B70DB]/10 flex items-center justify-center">
+        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center">
           <div className="text-7xl">
             {issue.category === 'Garbage' ? '🗑️' : issue.category === 'Water' ? '💧' : issue.category === 'Road' ? '🛣️' : issue.category === 'Safety' ? '⚠️' : issue.category === 'Parks' ? '🌳' : '📋'}
           </div>
@@ -170,7 +176,7 @@ export default function IssueCard({ issue, compact = false }) {
           </div>
         )}
 
-        <h3 className="text-lg font-bold text-[#29136C] mb-2 group-hover:text-[#4729A3] transition-colors">
+        <h3 className="text-lg font-bold text-emerald-950 mb-2 group-hover:text-emerald-700 transition-colors">
           {issue.title}
         </h3>
 
@@ -194,8 +200,13 @@ export default function IssueCard({ issue, compact = false }) {
                 size="sm"
                 onClick={handleRepost}
                 disabled={repostMutation.isPending}
-                className="h-7 px-2 gap-1 text-gray-600 hover:text-[#4729A3] hover:bg-[#4729A3]/10"
-              >
+                className={cn(
+                  "h-7 px-2 gap-1",
+                  hasReposted 
+                    ? "text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50" 
+                    : "text-gray-600 hover:text-emerald-700 hover:bg-emerald-50"
+                )}
+                >
                 {repostMutation.isPending ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
                 ) : (
@@ -213,9 +224,27 @@ export default function IssueCard({ issue, compact = false }) {
           </div>
         </div>
 
+        {/* Tagged Leaders */}
+        {taggedLeaders.length > 0 && (
+          <div className="flex items-center gap-2 mt-3 flex-wrap">
+            <span className="text-xs text-gray-500">Tagged:</span>
+            {taggedLeaders.slice(0, 2).map(leader => (
+              <span 
+                key={leader.id}
+                className="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-medium"
+              >
+                {leader.name}
+              </span>
+            ))}
+            {taggedLeaders.length > 2 && (
+              <span className="text-xs text-gray-400">+{taggedLeaders.length - 2} more</span>
+            )}
+          </div>
+        )}
+
         {issue.address && (
           <div className="flex items-center gap-1.5 mt-3 text-sm text-gray-500">
-            <MapPin className="w-4 h-4 text-[#4729A3]" />
+            <MapPin className="w-4 h-4 text-emerald-700" />
             <span className="truncate">{issue.address}</span>
           </div>
         )}
@@ -235,9 +264,9 @@ export default function IssueCard({ issue, compact = false }) {
                   "h-6 px-2 gap-1 text-xs",
                   hasReposted 
                     ? "text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50" 
-                    : "text-gray-500 hover:text-[#4729A3] hover:bg-[#4729A3]/10"
+                    : "text-gray-500 hover:text-emerald-700 hover:bg-emerald-50"
                 )}
-              >
+                >
                 {repostMutation.isPending ? (
                   <Loader2 className="w-3 h-3 animate-spin" />
                 ) : (
