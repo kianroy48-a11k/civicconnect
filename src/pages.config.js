@@ -1,3 +1,4 @@
+import CivicConnect from './pages/CivicConnect';
 import CivicPulse from './pages/CivicPulse';
 import Home from './pages/Home';
 import IssueDetail from './pages/IssueDetail';
@@ -6,11 +7,11 @@ import LeaderProfile from './pages/LeaderProfile';
 import Leaderboard from './pages/Leaderboard';
 import Profile from './pages/Profile';
 import ReportIssue from './pages/ReportIssue';
-import CivicConnect from './pages/CivicConnect';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
+    "CivicConnect": CivicConnect,
     "CivicPulse": CivicPulse,
     "Home": Home,
     "IssueDetail": IssueDetail,
@@ -19,7 +20,6 @@ export const PAGES = {
     "Leaderboard": Leaderboard,
     "Profile": Profile,
     "ReportIssue": ReportIssue,
-    "CivicConnect": CivicConnect,
 }
 
 export const pagesConfig = {

@@ -61,7 +61,7 @@ export default function Home() {
       {featuredIssue && <IssueLifecycleTimeline issue={featuredIssue} />}
       <CommunityPressureSection topIssues={topIssues} />
       <AccountabilityDashboard leaders={leaders} issues={issues} />
-      <PersonalizedIssueFeed issues={issues} locality="Bangalore" />
+      <PersonalizedIssueFeed issues={issues} />
       <ClosingSection />
     </div>
   );

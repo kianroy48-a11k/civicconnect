@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Filter, Flame, ThumbsUp, Clock, CheckCircle } from 'lucide-react';
+import { Filter, Flame, ThumbsUp, Clock, CheckCircle, MapPin, Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import IssueCard from '../cards/IssueCard';
 
 const FILTER_OPTIONS = [
@@ -10,12 +11,39 @@ const FILTER_OPTIONS = [
   { value: 'urgent', label: 'Most Urgent', icon: Flame }
 ];
 
-export default function PersonalizedIssueFeed({ issues, locality }) {
+export default function PersonalizedIssueFeed({ issues }) {
   const [activeFilter, setActiveFilter] = useState('ignored');
+  const [detectedLocality, setDetectedLocality] = useState(null);
+  const [detecting, setDetecting] = useState(false);
+
+  const handleDetectLocation = async () => {
+    setDetecting(true);
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+      
+      const { latitude, longitude } = position.coords;
+      
+      // Reverse geocode using Nominatim API
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+      );
+      const data = await response.json();
+      
+      const locality = data.address?.city || data.address?.town || data.address?.state || 'Unknown';
+      setDetectedLocality(locality);
+    } catch (error) {
+      console.error('Location detection failed:', error);
+      setDetectedLocality('India');
+    } finally {
+      setDetecting(false);
+    }
+  };
 
   const filteredIssues = useMemo(() => {
-    let filtered = locality 
-      ? issues.filter(i => i.city === locality || i.locality === locality)
+    let filtered = detectedLocality 
+      ? issues.filter(i => i.city === detectedLocality || i.locality === detectedLocality || i.state === detectedLocality)
       : issues;
 
     switch (activeFilter) {
@@ -48,7 +76,7 @@ export default function PersonalizedIssueFeed({ issues, locality }) {
       default:
         return filtered.slice(0, 6);
     }
-  }, [issues, locality, activeFilter]);
+  }, [issues, detectedLocality, activeFilter]);
 
   return (
     <div className="py-20 bg-white dark:bg-slate-900">
@@ -57,9 +85,31 @@ export default function PersonalizedIssueFeed({ issues, locality }) {
           <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Issues in Your Area
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400">
-            Filtered for {locality || 'all locations'}
-          </p>
+          <div className="flex items-center justify-center gap-3">
+            <Button
+              onClick={handleDetectLocation}
+              disabled={detecting}
+              variant="outline"
+              className="border-2 border-slate-300 dark:border-slate-600 px-6 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+            >
+              {detecting ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Detecting...
+                </>
+              ) : (
+                <>
+                  <MapPin className="w-4 h-4 mr-2" />
+                  {detectedLocality || 'Detect My Location'}
+                </>
+              )}
+            </Button>
+          </div>
+          {detectedLocality && (
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
+              Showing issues in {detectedLocality}
+            </p>
+          )}
         </div>
 
         {/* Filter Buttons */}
