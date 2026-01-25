@@ -10,7 +10,8 @@ import {
   Menu,
   X,
   Zap,
-  HelpCircle
+  HelpCircle,
+  User
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import OnboardingModal from './components/onboarding/OnboardingModal';
@@ -25,6 +26,7 @@ export default function Layout({ children, currentPageName }) {
     { name: 'Report', icon: PlusCircle, page: 'ReportIssue' },
     { name: 'Leaderboard', icon: Users, page: 'Leaderboard' },
     { name: 'Civic Pulse', icon: TrendingUp, page: 'CivicPulse' },
+    { name: 'Profile', icon: User, page: 'Profile' },
   ];
 
   return (

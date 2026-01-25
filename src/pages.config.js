@@ -5,6 +5,7 @@ import IssueMap from './pages/IssueMap';
 import LeaderProfile from './pages/LeaderProfile';
 import Leaderboard from './pages/Leaderboard';
 import ReportIssue from './pages/ReportIssue';
+import Profile from './pages/Profile';
 import __Layout from './Layout.jsx';
 
 
@@ -16,6 +17,7 @@ export const PAGES = {
     "LeaderProfile": LeaderProfile,
     "Leaderboard": Leaderboard,
     "ReportIssue": ReportIssue,
+    "Profile": Profile,
 }
 
 export const pagesConfig = {
