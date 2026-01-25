@@ -55,7 +55,6 @@ export default function Home() {
     <div className="min-h-screen bg-white dark:bg-slate-900">
       <HeroSection stats={stats} />
       <PersonalizedIssueFeed issues={issues} />
-      <ProblemProgressSection />
       <CommunityPressureSection topIssues={topIssues} />
       <AccountabilityDashboard leaders={leaders} issues={issues} />
       <LiveMapSection issues={issues} />
