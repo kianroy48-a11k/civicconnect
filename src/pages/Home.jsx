@@ -23,6 +23,15 @@ import { isPast } from 'date-fns';
 import { motion } from 'framer-motion';
 
 export default function Home() {
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  useEffect(() => {
+    const hasSeenOnboarding = localStorage.getItem('civic_audit_onboarding_completed');
+    if (!hasSeenOnboarding) {
+      setShowOnboarding(true);
+    }
+  }, []);
+
   const { data: issues = [], isLoading: issuesLoading } = useQuery({
     queryKey: ['issues'],
     queryFn: () => base44.entities.Issue.list('-created_date', 50)
@@ -63,6 +72,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <OnboardingModal 
+        isOpen={showOnboarding} 
+        onClose={() => setShowOnboarding(false)} 
+      />
+
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[#29136C] via-[#4729A3] to-[#8B70DB] text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
