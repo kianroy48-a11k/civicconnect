@@ -21,10 +21,12 @@ import {
   Flame,
   CheckCircle,
   Clock,
-  ExternalLink
+  ExternalLink,
+  Loader2
 } from 'lucide-react';
 import { formatDistanceToNow, isPast } from 'date-fns';
 import { cn } from '@/lib/utils';
+import PersonalizedIssueFeed from '../components/homepage/PersonalizedIssueFeed';
 import 'leaflet/dist/leaflet.css';
 
 const STATUS_COLORS = {
@@ -136,6 +138,11 @@ export default function IssueMap() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
+      {/* Issues in Your Area Section */}
+      <div className="bg-white dark:bg-slate-900 border-b border-slate-200/50 dark:border-slate-700/50">
+        <PersonalizedIssueFeed issues={issues} />
+      </div>
+
       {/* Header */}
       <div className="bg-white dark:bg-slate-900 border-b border-slate-200/50 dark:border-slate-700/50 sticky top-16 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
