@@ -74,11 +74,11 @@ function LayoutContent({ children, currentPageName }) {
             <Link to={createPageUrl('Home')} className="flex items-center gap-3 flex-shrink-0">
               <img 
                 src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6975aa81c03ae9bc99ebadca/17cdf2ece_ChatGPT_Image_Jan_25__2026__11_48_34_AM-removebg-preview.png"
-                alt="Civic Audit Logo"
+                alt="Civic Connect Logo"
                 className="h-10 w-auto"
               />
               <span className="font-bold text-xl text-slate-900 dark:text-white hidden sm:block">
-                Civic Audit
+                Civic Connect
               </span>
             </Link>
 
@@ -163,10 +163,10 @@ function LayoutContent({ children, currentPageName }) {
             <div className="flex items-center gap-2">
               <img 
                 src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6975aa81c03ae9bc99ebadca/17cdf2ece_ChatGPT_Image_Jan_25__2026__11_48_34_AM-removebg-preview.png"
-                alt="Civic Audit Logo"
+                alt="Civic Connect Logo"
                 className="h-8 w-auto"
               />
-              <span className="font-semibold">Civic Audit</span>
+              <span className="font-semibold">Civic Connect</span>
             </div>
             <p className="text-white/60 text-sm text-center">
               Empowering citizens through transparent civic accountability
