@@ -71,6 +71,22 @@ export default function Layout({ children, currentPageName }) {
               </span>
             </Link>
 
+            {/* Quick Actions */}
+            <div className="hidden lg:flex items-center gap-2 ml-4">
+              <Link to={createPageUrl('ReportIssue')}>
+                <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium bg-emerald-700 text-white hover:bg-emerald-800 transition-all shadow-sm">
+                  <PlusCircle className="w-4 h-4" />
+                  Report
+                </button>
+              </Link>
+              <Link to={createPageUrl('IssueMap')}>
+                <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-emerald-700 hover:bg-emerald-50 transition-all border border-emerald-200">
+                  <MapPin className="w-4 h-4" />
+                  Map
+                </button>
+              </Link>
+            </div>
+
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-1">
               {navItems.map((item) => (

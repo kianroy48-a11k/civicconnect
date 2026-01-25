@@ -120,80 +120,65 @@ export default function Home() {
     return filtered;
   }, [issues, filters]);
 
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+
+  const handleScroll = (e) => {
+    const container = e.target;
+    const scrollPosition = container.scrollTop;
+    const itemHeight = container.scrollHeight / filteredIssues.length;
+    const newIndex = Math.round(scrollPosition / itemHeight);
+    if (newIndex !== currentIndex && newIndex >= 0 && newIndex < filteredIssues.length) {
+      setCurrentIndex(newIndex);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+    <div className="min-h-screen bg-white">
       <OnboardingModal 
         isOpen={showOnboarding} 
         onClose={() => setShowOnboarding(false)} 
       />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-emerald-950">Your Civic Dashboard</h1>
-            <p className="text-emerald-700 mt-1">Track and resolve community issues</p>
-          </div>
-          <div className="flex gap-3">
-            <Link to={createPageUrl('ReportIssue')}>
-              <Button className="bg-emerald-700 hover:bg-emerald-800 text-white gap-2 shadow-lg shadow-emerald-700/25">
-                <PlusCircle className="w-5 h-5" />
-                Report Issue
-              </Button>
-            </Link>
-            <Link to={createPageUrl('IssueMap')}>
-              <Button variant="outline" className="border-emerald-300 text-emerald-700 hover:bg-emerald-50 gap-2">
-                <MapPin className="w-5 h-5" />
-                View Map
-              </Button>
-            </Link>
-          </div>
+      <div className="max-w-2xl mx-auto">
+        {/* Compact Filter Bar */}
+        <div className="sticky top-16 z-40 bg-white/95 backdrop-blur-sm border-b border-emerald-100 px-4 py-3">
+          <IssueFilterBar filters={filters} onFilterChange={setFilters} />
         </div>
 
-        {/* Filter Bar */}
-        <IssueFilterBar filters={filters} onFilterChange={setFilters} />
-
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white rounded-xl p-4 border border-emerald-200/50">
-            <p className="text-2xl font-bold text-emerald-900">{issues.length}</p>
-            <p className="text-sm text-emerald-600">Total Issues</p>
-          </div>
-          <div className="bg-white rounded-xl p-4 border border-emerald-200/50">
-            <p className="text-2xl font-bold text-emerald-600">
-              {issues.filter(i => i.status === 'Resolved').length}
-            </p>
-            <p className="text-sm text-emerald-600">Resolved</p>
-          </div>
-          <div className="bg-white rounded-xl p-4 border border-emerald-200/50">
-            <p className="text-2xl font-bold text-amber-600">
-              {issues.filter(i => i.status === 'In Progress').length}
-            </p>
-            <p className="text-sm text-emerald-600">In Progress</p>
-          </div>
-          <div className="bg-white rounded-xl p-4 border border-emerald-200/50">
-            <p className="text-2xl font-bold text-red-600">
-              {issues.filter(i => i.sla_deadline && isPast(new Date(i.sla_deadline)) && i.status !== 'Resolved').length}
-            </p>
-            <p className="text-sm text-emerald-600">Overdue</p>
-          </div>
+        {/* Single Post Feed */}
+        <div 
+          className="h-[calc(100vh-140px)] overflow-y-auto scroll-smooth snap-y snap-mandatory"
+          onScroll={handleScroll}
+        >
+          {isLoading ? (
+            <div className="h-full flex items-center justify-center">
+              <Loader2 className="w-8 h-8 animate-spin text-emerald-700" />
+            </div>
+          ) : filteredIssues.length === 0 ? (
+            <div className="h-full flex items-center justify-center px-6">
+              <div className="text-center">
+                <p className="text-emerald-600 mb-2 text-lg">No issues found</p>
+                <p className="text-sm text-gray-400">Try adjusting your filters</p>
+              </div>
+            </div>
+          ) : (
+            filteredIssues.map((issue, index) => (
+              <div 
+                key={issue.id} 
+                className="min-h-[calc(100vh-140px)] snap-start flex items-center justify-center p-6"
+              >
+                <div className="w-full max-w-xl">
+                  <IssueCard key={issue.id} issue={issue} leaders={leaders} />
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
-        {/* Issues Feed */}
-        {isLoading ? (
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-emerald-700" />
-          </div>
-        ) : filteredIssues.length === 0 ? (
-          <div className="bg-white rounded-2xl p-12 text-center border border-emerald-200/50">
-            <p className="text-emerald-600 mb-2">No issues found</p>
-            <p className="text-sm text-gray-500">Try adjusting your filters</p>
-          </div>
-        ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredIssues.map((issue) => (
-              <IssueCard key={issue.id} issue={issue} leaders={leaders} />
-            ))}
+        {/* Scroll Indicator */}
+        {filteredIssues.length > 0 && (
+          <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-emerald-700 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
+            {currentIndex + 1} / {filteredIssues.length}
           </div>
         )}
       </div>
