@@ -2,14 +2,72 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../../utils';
 import { StatusBadge, SeverityBadge, CategoryBadge } from '../ui/StatusBadge';
-import { MapPin, Clock, Users, Repeat2, AlertTriangle } from 'lucide-react';
-import { formatDistanceToNow, isPast } from 'date-fns';
+import { MapPin, Clock, Users, Repeat2, AlertTriangle, Loader2 } from 'lucide-react';
+import { formatDistanceToNow, isPast, differenceInHours } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { base44 } from '@/api/base44Client';
+import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 export default function IssueCard({ issue, compact = false }) {
   const [imageError, setImageError] = React.useState(false);
+  const [user, setUser] = React.useState(null);
+  const queryClient = useQueryClient();
   const isOverdue = issue.sla_deadline && isPast(new Date(issue.sla_deadline)) && issue.status !== 'Resolved';
   const timeAgo = formatDistanceToNow(new Date(issue.created_date), { addSuffix: true });
+
+  React.useEffect(() => {
+    base44.auth.me().then(setUser).catch(() => {});
+  }, []);
+
+  const { data: reposts = [] } = useQuery({
+    queryKey: ['reposts', issue.id],
+    queryFn: () => base44.entities.Repost.filter({ issue_id: issue.id }),
+    enabled: !!issue.id
+  });
+
+  const repostMutation = useMutation({
+    mutationFn: async () => {
+      const userReposts = reposts.filter(r => r.user_email === user?.email);
+      const recentRepost = userReposts.find(r => 
+        differenceInHours(new Date(), new Date(r.created_date)) < 24
+      );
+      
+      if (recentRepost) {
+        throw new Error('You can only repost once every 24 hours');
+      }
+
+      await base44.entities.Repost.create({
+        issue_id: issue.id,
+        user_email: user?.email
+      });
+
+      await base44.entities.Issue.update(issue.id, {
+        repost_count: (issue.repost_count || 0) + 1,
+        civic_pulse_score: (issue.civic_pulse_score || 0) + 10
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['issues']);
+      queryClient.invalidateQueries(['issue', issue.id]);
+      queryClient.invalidateQueries(['reposts', issue.id]);
+      toast.success('Issue reposted successfully!');
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    }
+  });
+
+  const handleRepost = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!user) {
+      toast.error('Please log in to repost');
+      return;
+    }
+    repostMutation.mutate();
+  };
 
   if (compact) {
     return (
@@ -123,15 +181,33 @@ export default function IssueCard({ issue, compact = false }) {
         <div className="flex items-center justify-between">
           <StatusBadge status={issue.status} size="sm" />
           
-          <div className="flex items-center gap-4 text-sm text-gray-500">
-            <span className="flex items-center gap-1">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1 text-sm text-gray-500">
               <Users className="w-4 h-4" />
               {issue.vouch_count || 0}
             </span>
-            <span className="flex items-center gap-1">
-              <Repeat2 className="w-4 h-4" />
-              {issue.repost_count || 0}
-            </span>
+            {issue.status !== 'Resolved' && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleRepost}
+                disabled={repostMutation.isPending}
+                className="h-7 px-2 gap-1 text-gray-600 hover:text-[#4729A3] hover:bg-[#4729A3]/10"
+              >
+                {repostMutation.isPending ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Repeat2 className="w-4 h-4" />
+                )}
+                <span className="text-sm">{issue.repost_count || 0}</span>
+              </Button>
+            )}
+            {issue.status === 'Resolved' && (
+              <span className="flex items-center gap-1 text-sm text-gray-500">
+                <Repeat2 className="w-4 h-4" />
+                {issue.repost_count || 0}
+              </span>
+            )}
           </div>
         </div>
 
