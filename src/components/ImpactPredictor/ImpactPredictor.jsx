@@ -19,16 +19,16 @@ const SEVERITY_WEIGHTS = {
 };
 
 export default function ImpactPredictor({ category, severity, ward, latitude }) {
+  const affectedScore = useMemo(() => {
+    let score = 30;
+    if (ward || latitude) {
+      score += 20;
+    }
+    return score;
+  }, [ward, latitude]);
+
   const impactScore = useMemo(() => {
     if (!category || !severity) return 0;
-
-    // Estimate affected population (0-100 scale)
-    // Base estimate: 30 (some people affected)
-    // Boost if in populated area (ward/latitude provided): +20
-    let affectedScore = 30;
-    if (ward || latitude) {
-      affectedScore += 20;
-    }
 
     // Severity component (0-100)
     const severityScore = SEVERITY_WEIGHTS[severity] || 50;
@@ -42,7 +42,7 @@ export default function ImpactPredictor({ category, severity, ward, latitude }) 
     );
 
     return Math.min(100, Math.max(0, score));
-  }, [category, severity, ward, latitude]);
+  }, [category, severity, affectedScore]);
 
   const getImpactLevel = () => {
     if (impactScore >= 76) return { label: 'Critical Impact', color: 'bg-red-500', lightBg: 'bg-red-50', textColor: 'text-red-700' };
