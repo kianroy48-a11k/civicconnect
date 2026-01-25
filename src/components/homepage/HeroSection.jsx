@@ -176,11 +176,6 @@ export default function HeroSection({ stats }) {
                 Report an Issue
               </Button>
             </Link>
-            <Link to={createPageUrl('IssueMap')}>
-              <Button variant="outline" className="border-2 border-slate-300 dark:border-slate-600 px-8 py-6 text-lg rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
-                Track an Issue in My Area
-              </Button>
-            </Link>
             <Link to={createPageUrl('CivicPulse')}>
               <Button variant="outline" className="border-2 border-slate-300 dark:border-slate-600 px-8 py-6 text-lg rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
                 View Ongoing Issues
