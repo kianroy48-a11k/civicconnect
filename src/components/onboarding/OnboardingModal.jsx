@@ -34,14 +34,14 @@ const tutorialPages = [
         <p className="text-lg text-gray-700 leading-relaxed">
           A platform that transforms civic complaints into tracked, time-bound accountability.
         </p>
-        <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-200">
-          <p className="font-semibold text-emerald-900 mb-2">The Core Problem</p>
+        <div className="bg-blue-50 rounded-xl p-4 border border-blue-200">
+          <p className="font-semibold text-blue-900 mb-2">The Core Problem</p>
           <p className="text-gray-600">
             Citizens report issues that often go unresolved with no transparency, no deadlines, and no accountability.
           </p>
         </div>
-        <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-200">
-          <p className="font-semibold text-emerald-700 mb-2">Our Solution</p>
+        <div className="bg-blue-50 rounded-xl p-4 border border-blue-200">
+          <p className="font-semibold text-blue-700 mb-2">Our Solution</p>
           <p className="text-gray-700">
             <strong>From Complaint → Closure</strong> with public visibility, SLA tracking, leader ratings, and community verification.
           </p>
@@ -59,28 +59,28 @@ const tutorialPages = [
         </p>
         <div className="space-y-3">
           <div className="flex gap-3 items-start">
-            <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
+            <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
             <div>
               <p className="font-semibold text-gray-800">Select Category</p>
               <p className="text-sm text-gray-600">Garbage, Water, Road, Safety, Parks, or Other</p>
             </div>
           </div>
           <div className="flex gap-3 items-start">
-            <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0">2</div>
+            <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</div>
             <div>
               <p className="font-semibold text-gray-800">Add Location & Photo</p>
               <p className="text-sm text-gray-600">GPS auto-detects, or manually select. Photo evidence strongly recommended.</p>
             </div>
           </div>
           <div className="flex gap-3 items-start">
-            <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0">3</div>
+            <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</div>
             <div>
               <p className="font-semibold text-gray-800">Specify Details</p>
               <p className="text-sm text-gray-600">Title, description, tags, and severity level</p>
             </div>
           </div>
           <div className="flex gap-3 items-start">
-            <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0">4</div>
+            <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">4</div>
             <div>
               <p className="font-semibold text-gray-800">Submit (Anonymously or Publicly)</p>
               <p className="text-sm text-gray-600">Your identity is protected if you choose anonymous mode</p>
@@ -125,8 +125,8 @@ const tutorialPages = [
           </p>
         </div>
 
-        <div className="bg-emerald-50 rounded-lg p-3 border border-emerald-200">
-          <p className="font-semibold text-emerald-900 flex items-center gap-2">
+        <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
+          <p className="font-semibold text-blue-900 flex items-center gap-2">
             <ThumbsUp className="w-4 h-4" />
             Verification / Vouch
           </p>
@@ -156,10 +156,10 @@ const tutorialPages = [
           Every issue is tracked from report to resolution with full transparency:
         </p>
         
-        <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 border border-emerald-200">
+        <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-4 border border-green-200">
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
-            <p className="font-semibold text-emerald-900">On Track</p>
+            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            <p className="font-semibold text-green-900">On Track</p>
           </div>
           <p className="text-sm text-gray-700">Issue reported, 24+ hours remaining until SLA deadline</p>
         </div>
@@ -197,7 +197,7 @@ const tutorialPages = [
 
         <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
           <p className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-emerald-700" />
+            <MapPin className="w-4 h-4 text-blue-600" />
             Issue Pins
           </p>
           <p className="text-sm text-gray-600">
@@ -236,8 +236,8 @@ const tutorialPages = [
           Leaders are rated by citizens based on responsiveness and effectiveness:
         </p>
 
-        <div className="bg-gradient-to-r from-emerald-50 to-green-50 rounded-xl p-4 border border-emerald-200">
-          <p className="font-semibold text-emerald-900 mb-2">+100 to +50: Excellent</p>
+        <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-4 border border-green-200">
+          <p className="font-semibold text-green-900 mb-2">+100 to +50: Excellent</p>
           <p className="text-sm text-gray-700">Highly responsive, resolves issues on time</p>
         </div>
 
@@ -321,8 +321,8 @@ const tutorialPages = [
     icon: Shield,
     content: (
       <div className="space-y-4">
-        <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-200">
-          <p className="font-semibold text-emerald-900 mb-2 flex items-center gap-2">
+        <div className="bg-blue-50 rounded-xl p-4 border border-blue-200">
+          <p className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
             <CheckCircle className="w-5 h-5" />
             Anonymous Protection
           </p>
@@ -389,8 +389,8 @@ const tutorialPages = [
           </div>
 
           <div className="flex gap-3 items-start">
-            <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
-              <Target className="w-4 h-4 text-emerald-600" />
+            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+              <Target className="w-4 h-4 text-blue-600" />
             </div>
             <div>
               <p className="font-semibold text-gray-800">Data-Driven Governance</p>
@@ -401,7 +401,7 @@ const tutorialPages = [
           </div>
         </div>
 
-        <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-200 mt-4">
+        <div className="bg-blue-50 rounded-xl p-4 border border-blue-200 mt-4">
           <p className="text-sm text-gray-700 italic">
             "When citizens have data, leaders are accountable. When leaders are accountable, governance improves."
           </p>
@@ -420,7 +420,7 @@ const tutorialPages = [
 
         <div className="grid gap-4">
           <Link to={createPageUrl('ReportIssue')}>
-            <Button className="w-full h-auto py-4 bg-emerald-700 hover:bg-emerald-800 justify-start">
+            <Button className="w-full h-auto py-4 bg-blue-600 hover:bg-blue-700 justify-start">
               <div className="flex items-center gap-4">
                 <Camera className="w-6 h-6" />
                 <div className="text-left">
@@ -432,11 +432,11 @@ const tutorialPages = [
           </Link>
 
           <Link to={createPageUrl('IssueMap')}>
-            <Button variant="outline" className="w-full h-auto py-4 justify-start border-emerald-300 hover:bg-emerald-50">
+            <Button variant="outline" className="w-full h-auto py-4 justify-start border-blue-300 hover:bg-blue-50">
               <div className="flex items-center gap-4">
-                <Map className="w-6 h-6 text-emerald-700" />
+                <Map className="w-6 h-6 text-blue-600" />
                 <div className="text-left">
-                  <p className="font-semibold text-base text-emerald-950">Explore the Map</p>
+                  <p className="font-semibold text-base text-slate-900">Explore the Map</p>
                   <p className="text-xs text-gray-500">See all reported issues</p>
                 </div>
               </div>
@@ -444,11 +444,11 @@ const tutorialPages = [
           </Link>
 
           <Link to={createPageUrl('Leaderboard')}>
-            <Button variant="outline" className="w-full h-auto py-4 justify-start border-emerald-300 hover:bg-emerald-50">
+            <Button variant="outline" className="w-full h-auto py-4 justify-start border-blue-300 hover:bg-blue-50">
               <div className="flex items-center gap-4">
-                <Users className="w-6 h-6 text-emerald-700" />
+                <Users className="w-6 h-6 text-blue-600" />
                 <div className="text-left">
-                  <p className="font-semibold text-base text-emerald-950">View Leaderboard</p>
+                  <p className="font-semibold text-base text-slate-900">View Leaderboard</p>
                   <p className="text-xs text-gray-500">See leader performance</p>
                 </div>
               </div>
@@ -456,11 +456,11 @@ const tutorialPages = [
           </Link>
 
           <Link to={createPageUrl('CivicPulse')}>
-            <Button variant="outline" className="w-full h-auto py-4 justify-start border-emerald-300 hover:bg-emerald-50">
+            <Button variant="outline" className="w-full h-auto py-4 justify-start border-blue-300 hover:bg-blue-50">
               <div className="flex items-center gap-4">
-                <TrendingUp className="w-6 h-6 text-emerald-700" />
+                <TrendingUp className="w-6 h-6 text-blue-600" />
                 <div className="text-left">
-                  <p className="font-semibold text-base text-emerald-950">Browse Civic Pulse</p>
+                  <p className="font-semibold text-base text-slate-900">Browse Civic Pulse</p>
                   <p className="text-xs text-gray-500">Trending issues feed</p>
                 </div>
               </div>
@@ -502,11 +502,11 @@ export default function OnboardingModal({ isOpen, onClose }) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] p-0 flex flex-col">
+      <DialogContent className="max-w-2xl max-h-[90vh] p-0 flex flex-col shadow-2xl border-2 border-blue-200">
         <DialogTitle className="sr-only">{tutorialPages[currentPage].title}</DialogTitle>
         <div className="flex flex-col max-h-[90vh]">
           {/* Header */}
-          <div className="bg-gradient-to-r from-emerald-800 to-emerald-600 p-6 text-white">
+          <div className="bg-gradient-to-r from-blue-700 to-blue-600 p-6 text-white shadow-lg">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
@@ -548,7 +548,7 @@ export default function OnboardingModal({ isOpen, onClose }) {
               </Button>
               <Button
                 onClick={handleNext}
-                className="bg-emerald-700 hover:bg-emerald-800 gap-2"
+                className="bg-blue-600 hover:bg-blue-700 gap-2"
               >
                 {currentPage === tutorialPages.length - 1 ? 'Get Started' : 'Next'}
                 <ChevronRight className="w-4 h-4" />
