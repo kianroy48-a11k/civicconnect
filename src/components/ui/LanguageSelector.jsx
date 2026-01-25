@@ -23,7 +23,7 @@ export default function LanguageSelector() {
 
   return (
     <Select value={language} onValueChange={setLanguage}>
-      <SelectTrigger className="w-[140px] border-emerald-300 dark:border-teal-600 bg-white dark:bg-slate-800 text-emerald-950 dark:text-teal-100 font-medium">
+      <SelectTrigger className="min-w-[140px] border-emerald-300 dark:border-teal-600 bg-white dark:bg-slate-800 text-emerald-950 dark:text-teal-100 font-medium">
         <Languages className="w-4 h-4 mr-2" />
         <SelectValue />
       </SelectTrigger>

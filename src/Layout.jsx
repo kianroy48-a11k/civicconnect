@@ -62,10 +62,10 @@ function LayoutContent({ children, currentPageName }) {
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-emerald-200/50 dark:border-emerald-800/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+        <div className="w-full px-[5%]">
+          <div className="flex items-center justify-between h-16 gap-6">
             {/* Logo */}
-            <Link to={createPageUrl('Home')} className="flex items-center gap-2">
+            <Link to={createPageUrl('Home')} className="flex items-center gap-3 flex-shrink-0">
               <img 
                 src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6975aa81c03ae9bc99ebadca/17cdf2ece_ChatGPT_Image_Jan_25__2026__11_48_34_AM-removebg-preview.png"
                 alt="Civic Audit Logo"
@@ -76,24 +76,8 @@ function LayoutContent({ children, currentPageName }) {
               </span>
             </Link>
 
-            {/* Quick Actions */}
-            <div className="hidden lg:flex items-center gap-3 ml-6">
-              <Link to={createPageUrl('ReportIssue')}>
-                <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-emerald-700 dark:bg-teal-500 text-white hover:bg-emerald-800 dark:hover:bg-teal-600 transition-all shadow-sm">
-                  <PlusCircle className="w-4 h-4" />
-                  {t('nav.report')}
-                </button>
-              </Link>
-              <Link to={createPageUrl('IssueMap')}>
-                <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-emerald-700 dark:text-teal-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all border border-emerald-200 dark:border-emerald-800">
-                  <MapPin className="w-4 h-4" />
-                  {t('nav.map')}
-                </button>
-              </Link>
-            </div>
-
-            {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-1">
+            {/* Desktop Nav - Centered */}
+            <div className="hidden lg:flex items-center gap-6 flex-1 justify-center mx-6">
               {navItems.map((item) => (
                 <Link
                   key={item.page}
@@ -109,22 +93,24 @@ function LayoutContent({ children, currentPageName }) {
                   {item.name}
                 </Link>
               ))}
+            </div>
+
+            {/* Right Side Utilities */}
+            <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
               <button
                 onClick={() => setShowOnboarding(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-emerald-950 dark:text-emerald-100 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all duration-200 ml-2"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-emerald-950 dark:text-emerald-100 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all duration-200"
                 title={t('nav.help')}
               >
                 <HelpCircle className="w-4 h-4" />
-                {t('nav.help')}
               </button>
-              <div className="flex items-center gap-3 ml-4 border-l border-emerald-200 dark:border-emerald-800 pl-4">
-                <ThemeToggle />
-                <LanguageSelector />
-              </div>
+              <div className="h-8 w-px bg-emerald-200 dark:bg-emerald-800" />
+              <ThemeToggle />
+              <LanguageSelector />
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center gap-2">
+            <div className="lg:hidden flex items-center gap-3">
               <ThemeToggle />
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -138,7 +124,7 @@ function LayoutContent({ children, currentPageName }) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white dark:bg-slate-900 border-t border-emerald-200/50 dark:border-emerald-800/50 py-2 px-4">
+          <div className="lg:hidden bg-white dark:bg-slate-900 border-t border-emerald-200/50 dark:border-emerald-800/50 py-2 px-4">
             {navItems.map((item) => (
               <Link
                 key={item.page}
