@@ -34,8 +34,8 @@ const tutorialPages = [
         <p className="text-lg text-gray-700 leading-relaxed">
           A platform that transforms civic complaints into tracked, time-bound accountability.
         </p>
-        <div className="bg-[#4729A3]/5 rounded-xl p-4 border border-[#4729A3]/20">
-          <p className="font-semibold text-[#29136C] mb-2">The Core Problem</p>
+        <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-200">
+          <p className="font-semibold text-emerald-900 mb-2">The Core Problem</p>
           <p className="text-gray-600">
             Citizens report issues that often go unresolved with no transparency, no deadlines, and no accountability.
           </p>
@@ -59,28 +59,28 @@ const tutorialPages = [
         </p>
         <div className="space-y-3">
           <div className="flex gap-3 items-start">
-            <div className="w-8 h-8 rounded-full bg-[#4729A3] text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
+            <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
             <div>
               <p className="font-semibold text-gray-800">Select Category</p>
               <p className="text-sm text-gray-600">Garbage, Water, Road, Safety, Parks, or Other</p>
             </div>
           </div>
           <div className="flex gap-3 items-start">
-            <div className="w-8 h-8 rounded-full bg-[#4729A3] text-white flex items-center justify-center font-bold flex-shrink-0">2</div>
+            <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0">2</div>
             <div>
               <p className="font-semibold text-gray-800">Add Location & Photo</p>
               <p className="text-sm text-gray-600">GPS auto-detects, or manually select. Photo evidence strongly recommended.</p>
             </div>
           </div>
           <div className="flex gap-3 items-start">
-            <div className="w-8 h-8 rounded-full bg-[#4729A3] text-white flex items-center justify-center font-bold flex-shrink-0">3</div>
+            <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0">3</div>
             <div>
               <p className="font-semibold text-gray-800">Specify Details</p>
               <p className="text-sm text-gray-600">Title, description, tags, and severity level</p>
             </div>
           </div>
           <div className="flex gap-3 items-start">
-            <div className="w-8 h-8 rounded-full bg-[#4729A3] text-white flex items-center justify-center font-bold flex-shrink-0">4</div>
+            <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0">4</div>
             <div>
               <p className="font-semibold text-gray-800">Submit (Anonymously or Publicly)</p>
               <p className="text-sm text-gray-600">Your identity is protected if you choose anonymous mode</p>
@@ -197,7 +197,7 @@ const tutorialPages = [
 
         <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
           <p className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-[#4729A3]" />
+            <MapPin className="w-4 h-4 text-emerald-700" />
             Issue Pins
           </p>
           <p className="text-sm text-gray-600">
@@ -359,7 +359,7 @@ const tutorialPages = [
     icon: TrendingUp,
     content: (
       <div className="space-y-4">
-        <p className="text-lg font-semibold text-[#29136C]">
+        <p className="text-lg font-semibold text-emerald-950">
           Public visibility creates accountability
         </p>
 
@@ -401,7 +401,7 @@ const tutorialPages = [
           </div>
         </div>
 
-        <div className="bg-[#4729A3]/5 rounded-xl p-4 border border-[#4729A3]/20 mt-4">
+        <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-200 mt-4">
           <p className="text-sm text-gray-700 italic">
             "When citizens have data, leaders are accountable. When leaders are accountable, governance improves."
           </p>
@@ -420,7 +420,7 @@ const tutorialPages = [
 
         <div className="grid gap-4">
           <Link to={createPageUrl('ReportIssue')}>
-            <Button className="w-full h-auto py-4 bg-[#4729A3] hover:bg-[#29136C] justify-start">
+            <Button className="w-full h-auto py-4 bg-emerald-700 hover:bg-emerald-800 justify-start">
               <div className="flex items-center gap-4">
                 <Camera className="w-6 h-6" />
                 <div className="text-left">
@@ -432,11 +432,11 @@ const tutorialPages = [
           </Link>
 
           <Link to={createPageUrl('IssueMap')}>
-            <Button variant="outline" className="w-full h-auto py-4 justify-start border-[#4729A3]/30 hover:bg-[#4729A3]/5">
+            <Button variant="outline" className="w-full h-auto py-4 justify-start border-emerald-300 hover:bg-emerald-50">
               <div className="flex items-center gap-4">
-                <Map className="w-6 h-6 text-[#4729A3]" />
+                <Map className="w-6 h-6 text-emerald-700" />
                 <div className="text-left">
-                  <p className="font-semibold text-base text-[#29136C]">Explore the Map</p>
+                  <p className="font-semibold text-base text-emerald-950">Explore the Map</p>
                   <p className="text-xs text-gray-500">See all reported issues</p>
                 </div>
               </div>
@@ -444,11 +444,11 @@ const tutorialPages = [
           </Link>
 
           <Link to={createPageUrl('Leaderboard')}>
-            <Button variant="outline" className="w-full h-auto py-4 justify-start border-[#4729A3]/30 hover:bg-[#4729A3]/5">
+            <Button variant="outline" className="w-full h-auto py-4 justify-start border-emerald-300 hover:bg-emerald-50">
               <div className="flex items-center gap-4">
-                <Users className="w-6 h-6 text-[#4729A3]" />
+                <Users className="w-6 h-6 text-emerald-700" />
                 <div className="text-left">
-                  <p className="font-semibold text-base text-[#29136C]">View Leaderboard</p>
+                  <p className="font-semibold text-base text-emerald-950">View Leaderboard</p>
                   <p className="text-xs text-gray-500">See leader performance</p>
                 </div>
               </div>
@@ -456,11 +456,11 @@ const tutorialPages = [
           </Link>
 
           <Link to={createPageUrl('CivicPulse')}>
-            <Button variant="outline" className="w-full h-auto py-4 justify-start border-[#4729A3]/30 hover:bg-[#4729A3]/5">
+            <Button variant="outline" className="w-full h-auto py-4 justify-start border-emerald-300 hover:bg-emerald-50">
               <div className="flex items-center gap-4">
-                <TrendingUp className="w-6 h-6 text-[#4729A3]" />
+                <TrendingUp className="w-6 h-6 text-emerald-700" />
                 <div className="text-left">
-                  <p className="font-semibold text-base text-[#29136C]">Browse Civic Pulse</p>
+                  <p className="font-semibold text-base text-emerald-950">Browse Civic Pulse</p>
                   <p className="text-xs text-gray-500">Trending issues feed</p>
                 </div>
               </div>
@@ -505,7 +505,7 @@ export default function OnboardingModal({ isOpen, onClose }) {
       <DialogContent className="max-w-2xl max-h-[90vh] p-0 flex flex-col">
         <div className="flex flex-col max-h-[90vh]">
           {/* Header */}
-          <div className="bg-gradient-to-r from-[#29136C] to-[#4729A3] p-6 text-white">
+          <div className="bg-gradient-to-r from-emerald-800 to-emerald-600 p-6 text-white">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
@@ -553,7 +553,7 @@ export default function OnboardingModal({ isOpen, onClose }) {
               </Button>
               <Button
                 onClick={handleNext}
-                className="bg-[#4729A3] hover:bg-[#29136C] gap-2"
+                className="bg-emerald-700 hover:bg-emerald-800 gap-2"
               >
                 {currentPage === tutorialPages.length - 1 ? 'Get Started' : 'Next'}
                 <ChevronRight className="w-4 h-4" />
