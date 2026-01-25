@@ -89,34 +89,34 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl"
+            className="max-w-3xl mx-auto text-center"
           >
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
               <Zap className="w-4 h-4 text-yellow-400" />
               <span className="text-sm font-medium">Data-driven civic accountability</span>
             </div>
-            
+
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Your Voice Shapes<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300">
                 Your Community
               </span>
             </h1>
-            
-            <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl">
+
+            <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto">
               Report issues, track progress, and hold leaders accountable through 
               transparent, community-powered civic engagement.
             </p>
-            
-            <div className="flex flex-wrap gap-4">
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to={createPageUrl('ReportIssue')}>
-                <Button size="lg" className="bg-white text-[#4729A3] hover:bg-white/90 font-semibold px-8">
-                  <AlertTriangle className="w-5 h-5 mr-2" />
+                <Button size="lg" className="bg-white text-[#4729A3] hover:bg-white/90 font-bold px-12 py-6 text-lg h-auto shadow-2xl hover:shadow-white/25 transition-all duration-300">
+                  <AlertTriangle className="w-6 h-6 mr-3" />
                   Report an Issue
                 </Button>
               </Link>
               <Link to={createPageUrl('IssueMap')}>
-                <Button size="lg" className="bg-[#4729A3] text-white hover:bg-[#29136C] border-2 border-white/30 font-semibold px-8">
+                <Button size="lg" className="bg-[#4729A3] text-white hover:bg-[#29136C] border-2 border-white/30 font-semibold px-8 h-auto py-4">
                   <MapPin className="w-5 h-5 mr-2" />
                   View Map
                 </Button>
