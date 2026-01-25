@@ -35,6 +35,7 @@ function LayoutContent({ children, currentPageName }) {
   const navItems = [
     { name: t('nav.home'), icon: Home, page: 'Home' },
     { name: t('nav.map'), icon: MapPin, page: 'IssueMap' },
+    { name: 'Civic Pulse', icon: TrendingUp, page: 'CivicPulse' },
     { name: t('nav.leaderboard'), icon: Users, page: 'Leaderboard' },
     { name: t('nav.profile'), icon: User, page: 'Profile' },
   ];
