@@ -44,11 +44,13 @@ export default function Layout({ children, currentPageName }) {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to={createPageUrl('Home')} className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#4729A3] to-[#8B70DB] flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
-              </div>
+              <img 
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6975aa81c03ae9bc99ebadca/17cdf2ece_ChatGPT_Image_Jan_25__2026__11_48_34_AM-removebg-preview.png"
+                alt="Civic Audit Logo"
+                className="h-10 w-auto"
+              />
               <span className="font-bold text-xl text-[#29136C] hidden sm:block">
-                Civic Connect
+                Civic Audit
               </span>
             </Link>
 
@@ -114,10 +116,12 @@ export default function Layout({ children, currentPageName }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                <Zap className="w-4 h-4" />
-              </div>
-              <span className="font-semibold">Civic Connect</span>
+              <img 
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6975aa81c03ae9bc99ebadca/17cdf2ece_ChatGPT_Image_Jan_25__2026__11_48_34_AM-removebg-preview.png"
+                alt="Civic Audit Logo"
+                className="h-8 w-auto"
+              />
+              <span className="font-semibold">Civic Audit</span>
             </div>
             <p className="text-white/60 text-sm text-center">
               Empowering citizens through transparent civic accountability
