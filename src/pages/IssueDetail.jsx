@@ -195,6 +195,23 @@ export default function IssueDetail() {
   const hoursUntilSLA = issue.sla_deadline 
     ? differenceInHours(new Date(issue.sla_deadline), new Date())
     : null;
+  
+  const contractStatus = getContractStatus(issue);
+  const isBreach = isContractBreached(issue);
+  const canResolve = canResolveContract(issue);
+
+  const resolveContractMutation = useMutation({
+    mutationFn: async () => {
+      await base44.entities.Issue.update(issueId, {
+        contract_status: 'Resolved',
+        status: 'Resolved'
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['issue', issueId]);
+      setShowResolveForm(false);
+    }
+  });
 
   return (
     <div className="min-h-screen bg-[#EEEBFA] py-8">
