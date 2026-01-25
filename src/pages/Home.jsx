@@ -5,7 +5,6 @@ import HeroSection from '../components/homepage/HeroSection';
 import LiveMapSection from '../components/homepage/LiveMapSection';
 import CommunityPressureSection from '../components/homepage/CommunityPressureSection';
 import AccountabilityDashboard from '../components/homepage/AccountabilityDashboard';
-import PersonalizedIssueFeed from '../components/homepage/PersonalizedIssueFeed';
 import ClosingSection from '../components/homepage/ClosingSection';
 import { Loader2 } from 'lucide-react';
 
