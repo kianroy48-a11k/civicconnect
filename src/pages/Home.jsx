@@ -5,12 +5,14 @@ import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import IssueCard from '../components/cards/IssueCard';
 import IssueFilterBar from '../components/filters/IssueFilterBar';
+import OnboardingModal from '../components/onboarding/OnboardingModal';
 import { Button } from '@/components/ui/button';
 import { PlusCircle, MapPin, Loader2 } from 'lucide-react';
 import { isPast, isWithinInterval, subDays } from 'date-fns';
 
 export default function Home() {
   const [user, setUser] = useState(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const [filters, setFilters] = useState({
     state: 'all',
     category: 'all',
@@ -21,6 +23,13 @@ export default function Home() {
 
   useEffect(() => {
     base44.auth.me().then(setUser).catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const hasSeenOnboarding = localStorage.getItem('civic_audit_onboarding_completed');
+    if (!hasSeenOnboarding) {
+      setShowOnboarding(true);
+    }
   }, []);
 
   const { data: issues = [], isLoading } = useQuery({
@@ -116,6 +125,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+      <OnboardingModal 
+        isOpen={showOnboarding} 
+        onClose={() => setShowOnboarding(false)} 
+      />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
