@@ -52,6 +52,9 @@ function MapUpdater({ center }) {
 }
 
 export default function IssueMap() {
+  const INDIA_BOUNDS = [[8.4, 68.7], [35.5, 97.4]]; // India geographic boundaries
+  const INDIA_CENTER = [22.5937, 78.9629]; // India center
+  
   const [filters, setFilters] = useState({
     category: 'all',
     status: 'all',
@@ -115,7 +118,7 @@ export default function IssueMap() {
   };
 
   const mapCenter = useMemo(() => {
-    if (filteredIssues.length === 0) return [20.5937, 78.9629]; // Default India center
+    if (filteredIssues.length === 0) return INDIA_CENTER;
     const avgLat = filteredIssues.reduce((sum, i) => sum + i.latitude, 0) / filteredIssues.length;
     const avgLng = filteredIssues.reduce((sum, i) => sum + i.longitude, 0) / filteredIssues.length;
     return [avgLat, avgLng];
@@ -226,9 +229,12 @@ export default function IssueMap() {
         ) : (
           <MapContainer
             center={mapCenter}
-            zoom={12}
+            zoom={6}
             className="h-full w-full z-0"
             style={{ background: '#EEEBFA' }}
+            maxBounds={INDIA_BOUNDS}
+            maxBoundsViscosity={1.0}
+            minZoom={5}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'

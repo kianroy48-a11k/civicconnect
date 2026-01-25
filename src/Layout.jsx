@@ -46,6 +46,14 @@ export default function Layout({ children, currentPageName }) {
           --warning: #F39C12;
           --success: #2ECC71;
         }
+        
+        * {
+          scroll-behavior: smooth;
+        }
+        
+        body {
+          background: linear-gradient(135deg, #EEEBFA 0%, #ffffff 100%);
+        }
       `}</style>
 
       {/* Navigation */}
@@ -84,6 +92,7 @@ export default function Layout({ children, currentPageName }) {
               <button
                 onClick={() => setShowOnboarding(true)}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-[#29136C] hover:bg-[#4729A3]/10 transition-all duration-200 ml-2"
+                title="View tutorial - Learn how Civic Audit works"
               >
                 <HelpCircle className="w-4 h-4" />
                 Help
