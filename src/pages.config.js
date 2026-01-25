@@ -6,6 +6,7 @@ import LeaderProfile from './pages/LeaderProfile';
 import Leaderboard from './pages/Leaderboard';
 import Profile from './pages/Profile';
 import ReportIssue from './pages/ReportIssue';
+import CivicConnect from './pages/CivicConnect';
 import __Layout from './Layout.jsx';
 
 
@@ -18,6 +19,7 @@ export const PAGES = {
     "Leaderboard": Leaderboard,
     "Profile": Profile,
     "ReportIssue": ReportIssue,
+    "CivicConnect": CivicConnect,
 }
 
 export const pagesConfig = {
