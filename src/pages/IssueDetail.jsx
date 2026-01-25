@@ -140,6 +140,8 @@ export default function IssueDetail() {
     }
   });
 
+  const hasReposted = user && reposts.some(r => r.user_email === user?.email);
+
   const assignMutation = useMutation({
     mutationFn: async () => {
       await base44.entities.Issue.update(issueId, {
@@ -366,8 +368,13 @@ export default function IssueDetail() {
                   variant="outline"
                   size="sm"
                   onClick={() => repostMutation.mutate()}
-                  disabled={!user || repostMutation.isPending}
-                  className="gap-2"
+                  disabled={!user || repostMutation.isPending || issue.status === 'Resolved'}
+                  className={cn(
+                    "gap-2",
+                    hasReposted 
+                      ? "border-emerald-500 text-emerald-600 bg-emerald-50 hover:bg-emerald-100" 
+                      : ""
+                  )}
                 >
                   {repostMutation.isPending ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
