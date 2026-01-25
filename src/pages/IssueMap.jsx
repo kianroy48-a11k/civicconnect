@@ -54,7 +54,7 @@ function MapUpdater({ center }) {
 }
 
 export default function IssueMap() {
-  const INDIA_BOUNDS = [[8.4, 68.7], [35.5, 97.4]]; // India geographic boundaries
+  const WORLD_BOUNDS = [[-85, -180], [85, 180]]; // Full world bounds
   const INDIA_CENTER = [22.5937, 78.9629]; // India center
   
   const [filters, setFilters] = useState({
