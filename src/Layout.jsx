@@ -117,7 +117,7 @@ function LayoutContent({ children, currentPageName }) {
                 <HelpCircle className="w-4 h-4" />
                 {t('nav.help')}
               </button>
-              <div className="flex items-center gap-2 ml-2 border-l border-emerald-200 dark:border-emerald-800 pl-2">
+              <div className="flex items-center gap-3 ml-4 border-l border-emerald-200 dark:border-emerald-800 pl-4">
                 <ThemeToggle />
                 <LanguageSelector />
               </div>

@@ -23,16 +23,16 @@ export default function LanguageSelector() {
 
   return (
     <Select value={language} onValueChange={setLanguage}>
-      <SelectTrigger className="w-[140px] border-emerald-200 dark:border-emerald-700 dark:bg-slate-800 dark:text-emerald-100">
+      <SelectTrigger className="w-[140px] border-emerald-300 dark:border-teal-600 bg-white dark:bg-slate-800 text-emerald-950 dark:text-teal-100 font-medium">
         <Languages className="w-4 h-4 mr-2" />
         <SelectValue />
       </SelectTrigger>
-      <SelectContent className="dark:bg-slate-800 dark:border-emerald-700">
+      <SelectContent className="bg-white dark:bg-slate-800 border-emerald-300 dark:border-teal-600">
         {LANGUAGES.map((lang) => (
           <SelectItem 
             key={lang.code} 
             value={lang.code}
-            className="dark:text-emerald-100 dark:focus:bg-emerald-900/30"
+            className="text-emerald-950 dark:text-teal-100 focus:bg-emerald-50 dark:focus:bg-teal-900/30 font-medium"
           >
             <span className="flex items-center gap-2">
               <span>{lang.flag}</span>
