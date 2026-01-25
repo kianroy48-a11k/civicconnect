@@ -18,10 +18,20 @@ export function LanguageProvider({ children }) {
     
     for (const k of keys) {
       value = value?.[k];
-      if (!value) break;
+      if (value === undefined) break;
     }
     
-    return value || translations.en[key] || key;
+    // Fallback to English if not found
+    if (value === undefined) {
+      let fallback = translations.en;
+      for (const k of keys) {
+        fallback = fallback?.[k];
+        if (fallback === undefined) return key;
+      }
+      return fallback;
+    }
+    
+    return value;
   };
 
   return (
