@@ -108,10 +108,10 @@ export default function Home() {
               transparent, community-powered civic engagement.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to={createPageUrl('ReportIssue')}>
-                <Button size="lg" className="bg-white text-[#4729A3] hover:bg-white/90 font-bold px-12 py-6 text-lg h-auto shadow-2xl hover:shadow-white/25 transition-all duration-300">
-                  <AlertTriangle className="w-6 h-6 mr-3" />
+            <div className="flex flex-col items-center justify-center gap-4">
+              <Link to={createPageUrl('ReportIssue')} className="w-full max-w-md">
+                <Button size="lg" className="w-full bg-white text-[#4729A3] hover:bg-white/90 font-bold px-16 py-7 text-xl h-auto shadow-2xl hover:shadow-white/25 transition-all duration-300">
+                  <AlertTriangle className="w-7 h-7 mr-3" />
                   Report an Issue
                 </Button>
               </Link>
