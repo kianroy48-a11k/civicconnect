@@ -43,15 +43,6 @@ export default function AccountabilityDashboard({ leaders, issues }) {
   return (
     <div className="py-20 bg-slate-50 dark:bg-slate-800">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Accountability That Carries Into Elections
-          </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400">
-            Track official performance with hard data, not promises
-          </p>
-        </div>
-
         {/* Time Range Filter */}
         <div className="flex items-center justify-center gap-3 mb-8">
           <Calendar className="w-5 h-5 text-slate-600 dark:text-slate-400" />
