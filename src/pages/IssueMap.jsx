@@ -239,9 +239,9 @@ export default function IssueMap() {
             zoom={5}
             className="h-full w-full z-0"
             style={{ background: '#f8fafc' }}
-            maxBounds={INDIA_BOUNDS}
-            maxBoundsViscosity={1.0}
-            minZoom={5}
+            maxBounds={WORLD_BOUNDS}
+            maxBoundsViscosity={0.75}
+            minZoom={2}
             maxZoom={18}
           >
             <TileLayer
