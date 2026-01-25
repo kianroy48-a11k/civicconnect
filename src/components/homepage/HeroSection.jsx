@@ -2,17 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../../utils';
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { MapPin, TrendingUp, Clock, CheckCircle2 } from 'lucide-react';
+import { MapPin, TrendingUp, Clock, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const LOCALITIES = [
-  'Bangalore', 'Mumbai', 'Delhi', 'Hyderabad', 'Chennai', 
-  'Kolkata', 'Pune', 'Ahmedabad', 'Jaipur', 'Lucknow'
-];
-
 export default function HeroSection({ stats }) {
-  const [selectedLocality, setSelectedLocality] = useState('Bangalore');
+  const [location, setLocation] = useState(null);
+  const [locationLoading, setLocationLoading] = useState(false);
   const [animatedStats, setAnimatedStats] = useState({
     reported: 0,
     resolved: 0,
@@ -41,6 +36,34 @@ export default function HeroSection({ stats }) {
 
     return () => clearInterval(timer);
   }, [stats]);
+
+  const detectLocation = async () => {
+    setLocationLoading(true);
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+
+      const { latitude, longitude } = position.coords;
+      
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
+      );
+      const data = await response.json();
+      
+      setLocation({
+        city: data.address.city || data.address.town || data.address.village || 'Unknown',
+        state: data.address.state || '',
+        latitude,
+        longitude
+      });
+    } catch (error) {
+      console.error('Location detection failed:', error);
+      setLocation({ city: 'Location unavailable', state: '', latitude: null, longitude: null });
+    } finally {
+      setLocationLoading(false);
+    }
+  };
 
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 py-20">
@@ -108,21 +131,42 @@ export default function HeroSection({ stats }) {
             </motion.div>
           </div>
 
-          {/* Locality Selector */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <div className="flex items-center gap-3">
-              <MapPin className="w-5 h-5 text-slate-600 dark:text-slate-400" />
-              <Select value={selectedLocality} onValueChange={setSelectedLocality}>
-                <SelectTrigger className="w-[200px] bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {LOCALITIES.map(locality => (
-                    <SelectItem key={locality} value={locality}>{locality}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+          {/* Location Detector */}
+          <div className="flex flex-col items-center justify-center gap-4 mb-8">
+            {location ? (
+              <div className="flex items-center gap-3 bg-white dark:bg-slate-800 rounded-xl px-6 py-3 shadow-md">
+                <MapPin className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                <span className="text-slate-900 dark:text-white font-medium">
+                  {location.city}{location.state ? `, ${location.state}` : ''}
+                </span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setLocation(null)}
+                  className="text-xs text-slate-500 hover:text-slate-700"
+                >
+                  Change
+                </Button>
+              </div>
+            ) : (
+              <Button
+                onClick={detectLocation}
+                disabled={locationLoading}
+                className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700 border-2 border-slate-300 dark:border-slate-600 px-6 py-6 text-base rounded-xl shadow-lg"
+              >
+                {locationLoading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                    Detecting Location...
+                  </>
+                ) : (
+                  <>
+                    <MapPin className="w-5 h-5 mr-2" />
+                    Detect My Location
+                  </>
+                )}
+              </Button>
+            )}
           </div>
 
           {/* CTAs */}
