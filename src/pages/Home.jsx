@@ -111,7 +111,7 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center gap-4">
               <Link to={createPageUrl('ReportIssue')} className="w-full max-w-md">
                 <Button size="lg" className="w-full bg-white text-[#4729A3] hover:bg-white/90 font-bold px-16 py-7 text-2xl h-auto shadow-2xl hover:shadow-white/25 transition-all duration-300">
-                  <AlertTriangle className="w-12 h-12 mr-3" />
+                  <AlertTriangle className="w-14 h-14 mr-3" />
                   Report an Issue
                 </Button>
               </Link>
