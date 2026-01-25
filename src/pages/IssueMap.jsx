@@ -283,20 +283,21 @@ export default function IssueMap() {
             ) : (
               // Heatmap zones
               heatmapZones.map((zone, idx) => {
-                const intensity = Math.min(zone.vouchCount / 10, 1);
-                const baseOpacity = 0.3 + intensity * 0.5;
-                const radius = 20 + zone.count * 5 + zone.vouchCount * 2;
-                
+                const intensity = Math.min(zone.count / 5, 1);
+                const baseOpacity = 0.5 + intensity * 0.4;
+                const radius = 15 + zone.count * 8;
+
                 return (
                   <CircleMarker
                     key={idx}
                     center={[zone.lat, zone.lng]}
-                    radius={Math.min(radius, 80)}
+                    radius={Math.min(radius, 60)}
                     pathOptions={{
-                      color: `rgba(231, 76, 60, ${baseOpacity})`,
-                      fillColor: `rgba(231, 76, 60, ${baseOpacity})`,
+                      color: '#dc2626',
+                      fillColor: '#dc2626',
                       fillOpacity: baseOpacity,
-                      weight: 0
+                      weight: 2,
+                      opacity: 0.8
                     }}
                   >
                     <Popup>
