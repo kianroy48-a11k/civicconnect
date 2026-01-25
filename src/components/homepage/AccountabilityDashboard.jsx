@@ -11,7 +11,9 @@ export default function AccountabilityDashboard({ leaders, issues }) {
   const filteredData = useMemo(() => {
     const cutoffDate = timeRange === '6months' 
       ? subMonths(new Date(), 6) 
-      : subMonths(new Date(), 3);
+      : timeRange === '3months'
+      ? subMonths(new Date(), 3)
+      : subMonths(new Date(), 12);
 
     const recentIssues = issues.filter(i => 
       isAfter(new Date(i.created_date), cutoffDate)
@@ -22,9 +24,16 @@ export default function AccountabilityDashboard({ leaders, issues }) {
       const resolved = leaderIssues.filter(i => i.status === 'Resolved').length;
       const total = leaderIssues.length;
       
+      // Use leader's actual stats if no recent issues
+      const resolutionRate = total > 0 
+        ? Math.round((resolved / total) * 100)
+        : leader.issues_assigned > 0 
+        ? Math.round((leader.issues_resolved / leader.issues_assigned) * 100)
+        : 0;
+      
       return {
         name: leader.name.split(' ')[0],
-        resolutionRate: total > 0 ? Math.round((resolved / total) * 100) : 0,
+        resolutionRate,
         avgTime: leader.avg_resolution_time || 0,
         unresolved: total - resolved
       };
