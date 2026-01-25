@@ -9,12 +9,15 @@ import {
   TrendingUp,
   Menu,
   X,
-  Zap
+  Zap,
+  HelpCircle
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import OnboardingModal from './components/onboarding/OnboardingModal';
 
 export default function Layout({ children, currentPageName }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const navItems = [
     { name: 'Home', icon: Home, page: 'Home' },
@@ -26,6 +29,11 @@ export default function Layout({ children, currentPageName }) {
 
   return (
     <div className="min-h-screen bg-[#EEEBFA]">
+      <OnboardingModal 
+        isOpen={showOnboarding} 
+        onClose={() => setShowOnboarding(false)} 
+      />
+      
       <style>{`
         :root {
           --primary: #4729A3;
@@ -71,6 +79,13 @@ export default function Layout({ children, currentPageName }) {
                   {item.name}
                 </Link>
               ))}
+              <button
+                onClick={() => setShowOnboarding(true)}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-[#29136C] hover:bg-[#4729A3]/10 transition-all duration-200 ml-2"
+              >
+                <HelpCircle className="w-4 h-4" />
+                Help
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
