@@ -69,7 +69,7 @@ export default function LiveMapSection({ issues }) {
           </MapContainer>
 
           {/* Legend */}
-          <div className="absolute top-4 right-4 bg-white dark:bg-slate-800 rounded-xl shadow-lg p-4 z-[1000]">
+          <div className="absolute top-4 right-4 bg-white dark:bg-slate-800 rounded-xl shadow-lg p-4 z-10">
             <h4 className="font-semibold text-sm text-slate-900 dark:text-white mb-3">Status Legend</h4>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-xs">
@@ -94,7 +94,7 @@ export default function LiveMapSection({ issues }) {
                 initial={{ x: 400 }}
                 animate={{ x: 0 }}
                 exit={{ x: 400 }}
-                className="absolute top-0 right-0 bottom-0 w-96 bg-white dark:bg-slate-900 shadow-2xl z-[1001] overflow-y-auto"
+                className="absolute top-0 right-0 bottom-0 w-96 bg-white dark:bg-slate-900 shadow-2xl z-20 overflow-y-auto"
               >
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
