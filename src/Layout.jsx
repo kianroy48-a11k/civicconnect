@@ -77,15 +77,15 @@ function LayoutContent({ children, currentPageName }) {
             </Link>
 
             {/* Quick Actions */}
-            <div className="hidden lg:flex items-center gap-2 ml-4">
+            <div className="hidden lg:flex items-center gap-3 ml-6">
               <Link to={createPageUrl('ReportIssue')}>
-                <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium bg-emerald-700 dark:bg-teal-500 text-white hover:bg-emerald-800 dark:hover:bg-teal-600 transition-all shadow-sm">
+                <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-emerald-700 dark:bg-teal-500 text-white hover:bg-emerald-800 dark:hover:bg-teal-600 transition-all shadow-sm">
                   <PlusCircle className="w-4 h-4" />
                   {t('nav.report')}
                 </button>
               </Link>
               <Link to={createPageUrl('IssueMap')}>
-                <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-emerald-700 dark:text-teal-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all border border-emerald-200 dark:border-emerald-800">
+                <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-emerald-700 dark:text-teal-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all border border-emerald-200 dark:border-emerald-800">
                   <MapPin className="w-4 h-4" />
                   {t('nav.map')}
                 </button>
