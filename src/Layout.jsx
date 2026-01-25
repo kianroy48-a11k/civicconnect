@@ -15,21 +15,26 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import OnboardingModal from './components/onboarding/OnboardingModal';
+import { ThemeProvider } from './components/providers/ThemeProvider';
+import { LanguageProvider, useLanguage } from './components/providers/LanguageProvider';
+import ThemeToggle from './components/ui/ThemeToggle';
+import LanguageSelector from './components/ui/LanguageSelector';
 
-export default function Layout({ children, currentPageName }) {
+function LayoutContent({ children, currentPageName }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const { t } = useLanguage();
 
   const navItems = [
-    { name: 'Home', icon: Home, page: 'Home' },
-    { name: 'Map', icon: MapPin, page: 'IssueMap' },
-    { name: 'Leaderboard', icon: Users, page: 'Leaderboard' },
-    { name: 'Civic Pulse', icon: TrendingUp, page: 'CivicPulse' },
-    { name: 'Profile', icon: User, page: 'Profile' },
+    { name: t('nav.home'), icon: Home, page: 'Home' },
+    { name: t('nav.map'), icon: MapPin, page: 'IssueMap' },
+    { name: t('nav.leaderboard'), icon: Users, page: 'Leaderboard' },
+    { name: t('nav.civicPulse'), icon: TrendingUp, page: 'CivicPulse' },
+    { name: t('nav.profile'), icon: User, page: 'Profile' },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       <OnboardingModal 
         isOpen={showOnboarding} 
         onClose={() => setShowOnboarding(false)} 
@@ -56,7 +61,7 @@ export default function Layout({ children, currentPageName }) {
       `}</style>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-emerald-200/50">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-emerald-200/50 dark:border-emerald-800/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -66,7 +71,7 @@ export default function Layout({ children, currentPageName }) {
                 alt="Civic Audit Logo"
                 className="h-10 w-auto"
               />
-              <span className="font-bold text-xl text-emerald-950 hidden sm:block">
+              <span className="font-bold text-xl text-emerald-950 dark:text-emerald-100 hidden sm:block">
                 Civic Audit
               </span>
             </Link>
@@ -74,15 +79,15 @@ export default function Layout({ children, currentPageName }) {
             {/* Quick Actions */}
             <div className="hidden lg:flex items-center gap-2 ml-4">
               <Link to={createPageUrl('ReportIssue')}>
-                <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium bg-emerald-700 text-white hover:bg-emerald-800 transition-all shadow-sm">
+                <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium bg-emerald-700 dark:bg-teal-500 text-white hover:bg-emerald-800 dark:hover:bg-teal-600 transition-all shadow-sm">
                   <PlusCircle className="w-4 h-4" />
-                  Report
+                  {t('nav.report')}
                 </button>
               </Link>
               <Link to={createPageUrl('IssueMap')}>
-                <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-emerald-700 hover:bg-emerald-50 transition-all border border-emerald-200">
+                <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-emerald-700 dark:text-teal-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all border border-emerald-200 dark:border-emerald-800">
                   <MapPin className="w-4 h-4" />
-                  Map
+                  {t('nav.map')}
                 </button>
               </Link>
             </div>
@@ -96,8 +101,8 @@ export default function Layout({ children, currentPageName }) {
                   className={cn(
                     "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                     currentPageName === item.page
-                      ? "bg-emerald-700 text-white shadow-lg shadow-emerald-700/25"
-                      : "text-emerald-950 hover:bg-emerald-50"
+                      ? "bg-emerald-700 dark:bg-teal-500 text-white shadow-lg shadow-emerald-700/25 dark:shadow-teal-500/25"
+                      : "text-emerald-950 dark:text-emerald-100 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
                   )}
                 >
                   <item.icon className="w-4 h-4" />
@@ -106,27 +111,34 @@ export default function Layout({ children, currentPageName }) {
               ))}
               <button
                 onClick={() => setShowOnboarding(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-emerald-950 hover:bg-emerald-50 transition-all duration-200 ml-2"
-                title="View tutorial - Learn how Civic Audit works"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-emerald-950 dark:text-emerald-100 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all duration-200 ml-2"
+                title={t('nav.help')}
               >
                 <HelpCircle className="w-4 h-4" />
-                Help
+                {t('nav.help')}
               </button>
+              <div className="flex items-center gap-2 ml-2 border-l border-emerald-200 dark:border-emerald-800 pl-2">
+                <ThemeToggle />
+                <LanguageSelector />
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-emerald-950 hover:bg-emerald-50"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            <div className="md:hidden flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 rounded-lg text-emerald-950 dark:text-emerald-100 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-emerald-200/50 py-2 px-4">
+          <div className="md:hidden bg-white dark:bg-slate-900 border-t border-emerald-200/50 dark:border-emerald-800/50 py-2 px-4">
             {navItems.map((item) => (
               <Link
                 key={item.page}
@@ -135,14 +147,17 @@ export default function Layout({ children, currentPageName }) {
                 className={cn(
                   "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all",
                   currentPageName === item.page
-                    ? "bg-emerald-700 text-white"
-                    : "text-emerald-950 hover:bg-emerald-50"
+                    ? "bg-emerald-700 dark:bg-teal-500 text-white"
+                    : "text-emerald-950 dark:text-emerald-100 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
                 )}
               >
                 <item.icon className="w-5 h-5" />
                 {item.name}
               </Link>
             ))}
+            <div className="mt-3 pt-3 border-t border-emerald-200 dark:border-emerald-800">
+              <LanguageSelector />
+            </div>
           </div>
         )}
       </nav>
@@ -153,7 +168,7 @@ export default function Layout({ children, currentPageName }) {
       </main>
 
       {/* Footer */}
-      <footer className="bg-emerald-950 text-white py-8 mt-auto">
+      <footer className="bg-emerald-950 dark:bg-slate-950 text-white py-8 mt-auto border-t border-emerald-900 dark:border-teal-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
@@ -170,6 +185,16 @@ export default function Layout({ children, currentPageName }) {
           </div>
         </div>
       </footer>
-    </div>
-  );
-}
+      </div>
+      );
+      }
+
+      export default function Layout({ children, currentPageName }) {
+      return (
+      <ThemeProvider>
+        <LanguageProvider>
+          <LayoutContent children={children} currentPageName={currentPageName} />
+        </LanguageProvider>
+      </ThemeProvider>
+      );
+      }
