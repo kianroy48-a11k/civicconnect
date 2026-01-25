@@ -99,9 +99,9 @@ export default function Leaderboard() {
   const topThree = filteredLeaders.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#EEEBFA] to-white">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-white">
       {/* Header */}
-      <div className="bg-gradient-to-br from-[#29136C] via-[#4729A3] to-[#8B70DB] text-white">
+      <div className="bg-gradient-to-br from-emerald-800 via-emerald-700 to-emerald-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex items-center gap-4 mb-8">
             <div className="p-4 bg-white/10 backdrop-blur-sm rounded-2xl">
@@ -206,7 +206,7 @@ export default function Leaderboard() {
                       {topThree[1].name?.charAt(0)}
                     </div>
                   )}
-                  <p className="font-bold text-[#29136C] text-sm truncate">{topThree[1].name}</p>
+                  <p className="font-bold text-emerald-950 text-sm truncate">{topThree[1].name}</p>
                   <p className="text-xs text-gray-500 truncate">{topThree[1].ward}</p>
                   <AuraScore score={topThree[1].aura_score} showLabel={false} />
                 </div>
@@ -236,7 +236,7 @@ export default function Leaderboard() {
                       {topThree[0].name?.charAt(0)}
                     </div>
                   )}
-                  <p className="font-bold text-[#29136C] truncate">{topThree[0].name}</p>
+                  <p className="font-bold text-emerald-950 truncate">{topThree[0].name}</p>
                   <p className="text-xs text-gray-500 truncate">{topThree[0].ward}</p>
                   <AuraScore score={topThree[0].aura_score} showLabel={false} />
                 </div>
@@ -264,7 +264,7 @@ export default function Leaderboard() {
                       {topThree[2].name?.charAt(0)}
                     </div>
                   )}
-                  <p className="font-bold text-[#29136C] text-sm truncate">{topThree[2].name}</p>
+                  <p className="font-bold text-emerald-950 text-sm truncate">{topThree[2].name}</p>
                   <p className="text-xs text-gray-500 truncate">{topThree[2].ward}</p>
                   <AuraScore score={topThree[2].aura_score} showLabel={false} />
                 </div>
