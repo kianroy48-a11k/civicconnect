@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import HeroSection from '../components/homepage/HeroSection';
 import ProblemProgressSection from '../components/homepage/ProblemProgressSection';
 import LiveMapSection from '../components/homepage/LiveMapSection';
-import IssueLifecycleTimeline from '../components/homepage/IssueLifecycleTimeline';
 import CommunityPressureSection from '../components/homepage/CommunityPressureSection';
 import AccountabilityDashboard from '../components/homepage/AccountabilityDashboard';
 import PersonalizedIssueFeed from '../components/homepage/PersonalizedIssueFeed';
@@ -56,12 +55,11 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
       <HeroSection stats={stats} />
+      <PersonalizedIssueFeed issues={issues} />
       <ProblemProgressSection />
-      <LiveMapSection issues={issues} />
-      {featuredIssue && <IssueLifecycleTimeline issue={featuredIssue} />}
       <CommunityPressureSection topIssues={topIssues} />
       <AccountabilityDashboard leaders={leaders} issues={issues} />
-      <PersonalizedIssueFeed issues={issues} />
+      <LiveMapSection issues={issues} />
       <ClosingSection />
     </div>
   );

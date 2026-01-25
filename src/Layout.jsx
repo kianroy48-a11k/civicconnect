@@ -29,7 +29,6 @@ function LayoutContent({ children, currentPageName }) {
     { name: t('nav.home'), icon: Home, page: 'Home' },
     { name: t('nav.map'), icon: MapPin, page: 'IssueMap' },
     { name: t('nav.leaderboard'), icon: Users, page: 'Leaderboard' },
-    { name: t('nav.civicPulse'), icon: TrendingUp, page: 'CivicPulse' },
     { name: t('nav.profile'), icon: User, page: 'Profile' },
   ];
 
@@ -106,7 +105,6 @@ function LayoutContent({ children, currentPageName }) {
               </button>
               <div className="h-8 w-px bg-blue-200 dark:bg-blue-800" />
               <ThemeToggle />
-              <LanguageSelector />
             </div>
 
             {/* Mobile Menu Button */}
@@ -141,9 +139,7 @@ function LayoutContent({ children, currentPageName }) {
                 {item.name}
               </Link>
             ))}
-            <div className="mt-3 pt-3 border-t border-blue-200 dark:border-blue-800">
-              <LanguageSelector />
-            </div>
+
           </div>
         )}
       </nav>
