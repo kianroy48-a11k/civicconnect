@@ -21,9 +21,16 @@ import ThemeToggle from './components/ui/ThemeToggle';
 import LanguageSelector from './components/ui/LanguageSelector';
 
 function LayoutContent({ children, currentPageName }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showOnboarding, setShowOnboarding] = useState(false);
-  const { t } = useLanguage();
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [showOnboarding, setShowOnboarding] = useState(false);
+    const { t } = useLanguage();
+
+    React.useEffect(() => {
+      const onboardingCompleted = localStorage.getItem('onboarding_completed');
+      if (!onboardingCompleted && currentPageName === 'Home') {
+        setShowOnboarding(true);
+      }
+    }, [currentPageName]);
 
   const navItems = [
     { name: t('nav.home'), icon: Home, page: 'Home' },
