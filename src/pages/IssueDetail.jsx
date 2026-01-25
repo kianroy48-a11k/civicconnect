@@ -213,19 +213,6 @@ export default function IssueDetail() {
   const isBreach = isContractBreached(issue);
   const canResolve = canResolveContract(issue);
 
-  const resolveContractMutation = useMutation({
-    mutationFn: async () => {
-      await base44.entities.Issue.update(issueId, {
-        contract_status: 'Resolved',
-        status: 'Resolved'
-      });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(['issue', issueId]);
-      setShowResolveForm(false);
-    }
-  });
-
   return (
     <div className="min-h-screen bg-[#EEEBFA] py-8">
       <div className="max-w-4xl mx-auto px-4">
