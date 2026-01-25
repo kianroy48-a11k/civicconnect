@@ -2,10 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../../utils';
 import AuraScore from '../ui/AuraScore';
-import { CheckCircle, Clock, Target, Award } from 'lucide-react';
+import { CheckCircle, Clock, Target, Award, AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { base44 } from '@/api/base44Client';
+import { useQuery } from '@tanstack/react-query';
 
 export default function LeaderCard({ leader, rank }) {
+  const { data: issues = [] } = useQuery({
+    queryKey: ['issues', leader.id],
+    queryFn: () => base44.entities.Issue.filter({ assigned_leader_id: leader.id })
+  });
+
+  const breachCount = React.useMemo(() => {
+    return issues.filter(i => i.contract_status === 'Contract Breached').length;
+  }, [issues]);
+
   const getRankStyle = () => {
     if (rank === 1) return 'bg-gradient-to-br from-yellow-400 to-amber-500 text-white';
     if (rank === 2) return 'bg-gradient-to-br from-gray-300 to-gray-400 text-white';
@@ -55,28 +66,37 @@ export default function LeaderCard({ leader, rank }) {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-3 mt-4">
+          <div className="grid grid-cols-4 gap-2 mt-4">
             <div className="text-center p-2 bg-gray-50 rounded-lg">
               <div className="flex items-center justify-center gap-1 text-emerald-600">
                 <CheckCircle className="w-4 h-4" />
-                <span className="font-bold">{leader.issues_resolved || 0}</span>
+                <span className="font-bold text-sm">{leader.issues_resolved || 0}</span>
               </div>
               <span className="text-xs text-gray-500">Resolved</span>
             </div>
             <div className="text-center p-2 bg-gray-50 rounded-lg">
               <div className="flex items-center justify-center gap-1 text-blue-600">
                 <Clock className="w-4 h-4" />
-                <span className="font-bold">{leader.issues_assigned || 0}</span>
+                <span className="font-bold text-sm">{leader.issues_assigned || 0}</span>
               </div>
               <span className="text-xs text-gray-500">Assigned</span>
             </div>
             <div className="text-center p-2 bg-gray-50 rounded-lg">
               <div className="flex items-center justify-center gap-1 text-purple-600">
                 <Target className="w-4 h-4" />
-                <span className="font-bold">{leader.sla_compliance_rate || 0}%</span>
+                <span className="font-bold text-sm">{leader.sla_compliance_rate || 0}%</span>
               </div>
               <span className="text-xs text-gray-500">SLA</span>
             </div>
+            {breachCount > 0 && (
+              <div className="text-center p-2 bg-red-50 rounded-lg border border-red-200">
+                <div className="flex items-center justify-center gap-1 text-red-600">
+                  <AlertTriangle className="w-4 h-4" />
+                  <span className="font-bold text-sm">{breachCount}</span>
+                </div>
+                <span className="text-xs text-red-600">Breached</span>
+              </div>
+            )}
           </div>
         </div>
 
