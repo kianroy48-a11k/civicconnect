@@ -2,20 +2,25 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../../utils';
 import { StatusBadge, SeverityBadge, CategoryBadge } from '../ui/StatusBadge';
-import { MapPin, Clock, Users, Repeat2, AlertTriangle, Loader2 } from 'lucide-react';
-import { formatDistanceToNow, isPast, differenceInHours } from 'date-fns';
+import { MapPin, Clock, Users, Repeat2, AlertTriangle, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { formatDistanceToNow, isPast, differenceInHours, format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { base44 } from '@/api/base44Client';
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import ContractAcceptanceModal from '../ContractAcceptanceModal';
+import { getContractStatus, isContractBreached, canResolveContract, getContractColor } from '../SmartContractLogic';
 
 export default function IssueCard({ issue, compact = false, leaders = [] }) {
   const [imageError, setImageError] = React.useState(false);
   const [user, setUser] = React.useState(null);
+  const [showContractModal, setShowContractModal] = React.useState(false);
   const queryClient = useQueryClient();
   const isOverdue = issue.sla_deadline && isPast(new Date(issue.sla_deadline)) && issue.status !== 'Resolved';
   const timeAgo = formatDistanceToNow(new Date(issue.created_date), { addSuffix: true });
+  const contractStatus = getContractStatus(issue);
+  const isBreach = isContractBreached(issue);
 
   React.useEffect(() => {
     base44.auth.me().then(setUser).catch(() => {});
@@ -70,6 +75,25 @@ export default function IssueCard({ issue, compact = false, leaders = [] }) {
   };
 
   const hasReposted = user && reposts.some(r => r.user_email === user?.email);
+
+  const acceptContractMutation = useMutation({
+    mutationFn: async (deadline) => {
+      await base44.entities.Issue.update(issue.id, {
+        contract_activated: true,
+        contract_status: 'Accepted',
+        resolution_deadline: new Date(deadline).toISOString()
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['issues']);
+      queryClient.invalidateQueries(['issue', issue.id]);
+      setShowContractModal(false);
+      toast.success('Responsibility accepted! Deadline locked.');
+    },
+    onError: (error) => {
+      toast.error(error.message || 'Failed to accept responsibility');
+    }
+  });
 
   // Get tagged leaders
   const taggedLeaders = React.useMemo(() => {
@@ -186,6 +210,23 @@ export default function IssueCard({ issue, compact = false, leaders = [] }) {
           </p>
         )}
 
+        {/* Contract Status Badge */}
+        {issue.contract_activated && (
+          <div className={cn("p-2.5 rounded-lg mb-4 border text-sm font-medium flex items-center gap-2", getContractColor(contractStatus))}>
+            {isBreach ? (
+              <AlertCircle className="w-4 h-4" />
+            ) : contractStatus === 'Resolved' ? (
+              <CheckCircle2 className="w-4 h-4" />
+            ) : null}
+            {contractStatus === 'Contract Breached' ? 'Deadline Missed' : contractStatus}
+            {issue.resolution_deadline && (
+              <span className="text-xs opacity-75 ml-auto">
+                by {format(new Date(issue.resolution_deadline), 'MMM d')}
+              </span>
+            )}
+          </div>
+        )}
+
         <div className="flex items-center justify-between">
           <StatusBadge status={issue.status} size="sm" />
           
@@ -224,23 +265,40 @@ export default function IssueCard({ issue, compact = false, leaders = [] }) {
           </div>
         </div>
 
-        {/* Tagged Leaders */}
-        {taggedLeaders.length > 0 && (
-          <div className="flex items-center gap-2 mt-3 flex-wrap">
-            <span className="text-xs text-gray-500">Tagged:</span>
-            {taggedLeaders.slice(0, 2).map(leader => (
-              <span 
-                key={leader.id}
-                className="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-medium"
-              >
-                {leader.name}
-              </span>
-            ))}
-            {taggedLeaders.length > 2 && (
-              <span className="text-xs text-gray-400">+{taggedLeaders.length - 2} more</span>
-            )}
-          </div>
-        )}
+        {/* Tagged Leaders & Accept Button */}
+        <div className="flex items-center justify-between gap-2 mt-3 flex-wrap">
+          {taggedLeaders.length > 0 && (
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-xs text-gray-500">Tagged:</span>
+              {taggedLeaders.slice(0, 2).map(leader => (
+                <span 
+                  key={leader.id}
+                  className="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-medium"
+                >
+                  {leader.name}
+                </span>
+              ))}
+              {taggedLeaders.length > 2 && (
+                <span className="text-xs text-gray-400">+{taggedLeaders.length - 2} more</span>
+              )}
+            </div>
+          )}
+          
+          {!issue.contract_activated && taggedLeaders.length > 0 && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setShowContractModal(true);
+              }}
+              className="text-xs h-6 border-blue-300 text-blue-600 hover:bg-blue-50"
+            >
+              Accept Responsibility
+            </Button>
+          )}
+        </div>
 
         {issue.address && (
           <div className="flex items-center gap-1.5 mt-3 text-sm text-gray-500">
@@ -282,6 +340,17 @@ export default function IssueCard({ issue, compact = false, leaders = [] }) {
           </div>
         </div>
       </div>
+
+      {showContractModal && (
+        <div onClick={(e) => e.stopPropagation()}>
+          <ContractAcceptanceModal
+            issue={issue}
+            onAccept={(deadline) => acceptContractMutation.mutate(deadline)}
+            onClose={() => setShowContractModal(false)}
+            isLoading={acceptContractMutation.isPending}
+          />
+        </div>
+      )}
     </Link>
   );
 }
