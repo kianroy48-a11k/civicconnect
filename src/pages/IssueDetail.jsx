@@ -169,6 +169,19 @@ export default function IssueDetail() {
     }
   });
 
+  const resolveContractMutation = useMutation({
+    mutationFn: async () => {
+      await base44.entities.Issue.update(issueId, {
+        contract_status: 'Resolved',
+        status: 'Resolved'
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['issue', issueId]);
+      setShowResolveForm(false);
+    }
+  });
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
