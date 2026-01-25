@@ -7,6 +7,7 @@ import { StatusBadge, SeverityBadge, CategoryBadge } from '../components/ui/Stat
 import AuraScore from '../components/ui/AuraScore';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { 
   MapPin, 
   Clock, 
@@ -21,7 +22,8 @@ import {
   MessageSquare,
   Loader2,
   Calendar,
-  User
+  User,
+  UserPlus
 } from 'lucide-react';
 import { format, formatDistanceToNow, isPast, differenceInHours } from 'date-fns';
 import { motion } from 'framer-motion';
@@ -36,6 +38,8 @@ export default function IssueDetail() {
   const [showVerifyForm, setShowVerifyForm] = useState(false);
   const [verifyType, setVerifyType] = useState('Exists');
   const [verifyComment, setVerifyComment] = useState('');
+  const [showAssignForm, setShowAssignForm] = useState(false);
+  const [selectedLeaderId, setSelectedLeaderId] = useState('');
 
   useEffect(() => {
     base44.auth.me().then(setUser).catch(() => {});
@@ -70,6 +74,11 @@ export default function IssueDetail() {
       return leaders[0];
     },
     enabled: !!issue?.assigned_leader_id
+  });
+
+  const { data: allLeaders = [] } = useQuery({
+    queryKey: ['leaders'],
+    queryFn: () => base44.entities.Leader.list()
   });
 
   const verifyMutation = useMutation({
@@ -128,6 +137,29 @@ export default function IssueDetail() {
     },
     onError: (error) => {
       alert(error.message);
+    }
+  });
+
+  const assignMutation = useMutation({
+    mutationFn: async () => {
+      await base44.entities.Issue.update(issueId, {
+        assigned_leader_id: selectedLeaderId,
+        status: issue.status === 'Reported' ? 'Verified' : issue.status
+      });
+
+      // Update leader stats
+      const assignedLeader = allLeaders.find(l => l.id === selectedLeaderId);
+      if (assignedLeader) {
+        await base44.entities.Leader.update(selectedLeaderId, {
+          issues_assigned: (assignedLeader.issues_assigned || 0) + 1
+        });
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['issue', issueId]);
+      queryClient.invalidateQueries(['leader', selectedLeaderId]);
+      setShowAssignForm(false);
+      setSelectedLeaderId('');
     }
   });
 
@@ -413,10 +445,22 @@ export default function IssueDetail() {
             )}
 
             {/* Assigned Leader */}
-            {leader && (
+            {leader ? (
               <div className="mt-6 p-4 bg-[#4729A3]/5 rounded-xl border border-[#4729A3]/20">
-                <h3 className="font-semibold text-[#29136C] mb-3">Assigned Official</h3>
-                <Link to={createPageUrl(`LeaderProfile?id=${leader.id}`)} className="flex items-center gap-4">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-semibold text-[#29136C]">Assigned Official</h3>
+                  {user?.role === 'admin' && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setShowAssignForm(true)}
+                      className="text-[#4729A3]"
+                    >
+                      Reassign
+                    </Button>
+                  )}
+                </div>
+                <Link to={createPageUrl(`LeaderProfile?id=${leader.id}`)} className="flex items-center gap-4 hover:bg-[#4729A3]/5 p-2 rounded-lg transition-colors">
                   {leader.profile_photo ? (
                     <img 
                       src={leader.profile_photo} 
@@ -435,6 +479,64 @@ export default function IssueDetail() {
                   <AuraScore score={leader.aura_score} />
                 </Link>
               </div>
+            ) : user?.role === 'admin' && (
+              <div className="mt-6">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowAssignForm(true)}
+                  className="w-full gap-2 border-[#4729A3]/30 text-[#4729A3] hover:bg-[#4729A3]/10"
+                >
+                  <UserPlus className="w-4 h-4" />
+                  Assign to Leader
+                </Button>
+              </div>
+            )}
+
+            {/* Assignment Form */}
+            {showAssignForm && user?.role === 'admin' && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                className="mt-4 p-4 bg-gray-50 rounded-xl border border-[#4729A3]/20"
+              >
+                <h3 className="font-semibold text-gray-700 mb-3">Assign Issue to Leader</h3>
+                <Select value={selectedLeaderId} onValueChange={setSelectedLeaderId}>
+                  <SelectTrigger className="w-full mb-3">
+                    <SelectValue placeholder="Select a leader..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {allLeaders.map((l) => (
+                      <SelectItem key={l.id} value={l.id}>
+                        {l.name} - {l.title} ({l.ward})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <div className="flex justify-end gap-2">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={() => {
+                      setShowAssignForm(false);
+                      setSelectedLeaderId('');
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                  <Button 
+                    size="sm"
+                    onClick={() => assignMutation.mutate()}
+                    disabled={!selectedLeaderId || assignMutation.isPending}
+                    className="bg-[#4729A3]"
+                  >
+                    {assignMutation.isPending ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      'Assign'
+                    )}
+                  </Button>
+                </div>
+              </motion.div>
             )}
 
             {/* Verifications Timeline */}
