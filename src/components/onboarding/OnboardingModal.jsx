@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { 
@@ -503,6 +503,7 @@ export default function OnboardingModal({ isOpen, onClose }) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] p-0 flex flex-col">
+        <DialogTitle className="sr-only">{tutorialPages[currentPage].title}</DialogTitle>
         <div className="flex flex-col max-h-[90vh]">
           {/* Header */}
           <div className="bg-gradient-to-r from-emerald-800 to-emerald-600 p-6 text-white">
@@ -516,12 +517,6 @@ export default function OnboardingModal({ isOpen, onClose }) {
                   <p className="text-sm text-white/70">Step {currentPage + 1} of {tutorialPages.length}</p>
                 </div>
               </div>
-              <button
-                onClick={handleComplete}
-                className="text-white/70 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
             </div>
             <Progress value={progress} className="h-1.5 bg-white/20" />
           </div>
