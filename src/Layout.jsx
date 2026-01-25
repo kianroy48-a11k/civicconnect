@@ -24,12 +24,11 @@ export default function Layout({ children, currentPageName }) {
     { name: 'Home', icon: Home, page: 'Home' },
     { name: 'Map', icon: MapPin, page: 'IssueMap' },
     { name: 'Leaderboard', icon: Users, page: 'Leaderboard' },
-    { name: 'Civic Pulse', icon: TrendingUp, page: 'CivicPulse' },
     { name: 'Profile', icon: User, page: 'Profile' },
   ];
 
   return (
-    <div className="min-h-screen bg-[#EEEBFA]">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
       <OnboardingModal 
         isOpen={showOnboarding} 
         onClose={() => setShowOnboarding(false)} 
@@ -37,26 +36,26 @@ export default function Layout({ children, currentPageName }) {
       
       <style>{`
         :root {
-          --primary: #4729A3;
-          --primary-dark: #29136C;
-          --accent: #8B70DB;
-          --neutral: #EEEBFA;
+          --primary: #047857;
+          --primary-dark: #065f46;
+          --accent: #34d399;
+          --neutral: #f0fdf4;
           --danger: #E74C3C;
           --warning: #F39C12;
-          --success: #2ECC71;
+          --success: #10b981;
         }
-        
+
         * {
           scroll-behavior: smooth;
         }
-        
+
         body {
-          background: linear-gradient(135deg, #EEEBFA 0%, #ffffff 100%);
+          background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
         }
       `}</style>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-[#4729A3]/10">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-emerald-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -66,7 +65,7 @@ export default function Layout({ children, currentPageName }) {
                 alt="Civic Audit Logo"
                 className="h-10 w-auto"
               />
-              <span className="font-bold text-xl text-[#29136C] hidden sm:block">
+              <span className="font-bold text-xl text-emerald-950 hidden sm:block">
                 Civic Audit
               </span>
             </Link>
@@ -80,8 +79,8 @@ export default function Layout({ children, currentPageName }) {
                   className={cn(
                     "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                     currentPageName === item.page
-                      ? "bg-[#4729A3] text-white shadow-lg shadow-[#4729A3]/25"
-                      : "text-[#29136C] hover:bg-[#4729A3]/10"
+                      ? "bg-emerald-700 text-white shadow-lg shadow-emerald-700/25"
+                      : "text-emerald-950 hover:bg-emerald-50"
                   )}
                 >
                   <item.icon className="w-4 h-4" />
@@ -90,7 +89,7 @@ export default function Layout({ children, currentPageName }) {
               ))}
               <button
                 onClick={() => setShowOnboarding(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-[#29136C] hover:bg-[#4729A3]/10 transition-all duration-200 ml-2"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-emerald-950 hover:bg-emerald-50 transition-all duration-200 ml-2"
                 title="View tutorial - Learn how Civic Audit works"
               >
                 <HelpCircle className="w-4 h-4" />
@@ -101,7 +100,7 @@ export default function Layout({ children, currentPageName }) {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-[#29136C] hover:bg-[#4729A3]/10"
+              className="md:hidden p-2 rounded-lg text-emerald-950 hover:bg-emerald-50"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -110,7 +109,7 @@ export default function Layout({ children, currentPageName }) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-[#4729A3]/10 py-2 px-4">
+          <div className="md:hidden bg-white border-t border-emerald-200/50 py-2 px-4">
             {navItems.map((item) => (
               <Link
                 key={item.page}
@@ -119,8 +118,8 @@ export default function Layout({ children, currentPageName }) {
                 className={cn(
                   "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all",
                   currentPageName === item.page
-                    ? "bg-[#4729A3] text-white"
-                    : "text-[#29136C] hover:bg-[#4729A3]/10"
+                    ? "bg-emerald-700 text-white"
+                    : "text-emerald-950 hover:bg-emerald-50"
                 )}
               >
                 <item.icon className="w-5 h-5" />
@@ -137,7 +136,7 @@ export default function Layout({ children, currentPageName }) {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#29136C] text-white py-8 mt-auto">
+      <footer className="bg-emerald-950 text-white py-8 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
