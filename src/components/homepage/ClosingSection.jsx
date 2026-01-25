@@ -22,12 +22,12 @@ export default function ClosingSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
             CivicConnect is not about complaints.<br />
-            It's about <span className="text-blue-200">closing the loop</span> between citizens and power.
+            It's about <span className="text-white">closing the loop</span> between citizens and power.
           </h2>
 
-          <p className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto">
+          <p className="text-2xl text-white mb-12 max-w-3xl mx-auto font-semibold drop-shadow-md">
             Every issue tracked. Every official measured. Every voice amplified.
           </p>
 
@@ -50,16 +50,16 @@ export default function ClosingSection() {
           {/* Trust Indicators */}
           <div className="mt-16 grid grid-cols-3 gap-8 max-w-3xl mx-auto">
             <div>
-              <div className="text-3xl font-bold text-white mb-2">100%</div>
-              <div className="text-sm text-blue-200">Transparency</div>
+              <div className="text-4xl font-bold text-white mb-2 drop-shadow-md">100%</div>
+              <div className="text-base text-white font-semibold drop-shadow-sm">Transparency</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-white mb-2">Public</div>
-              <div className="text-sm text-blue-200">Data Access</div>
+              <div className="text-4xl font-bold text-white mb-2 drop-shadow-md">Public</div>
+              <div className="text-base text-white font-semibold drop-shadow-sm">Data Access</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-white mb-2">Real</div>
-              <div className="text-sm text-blue-200">Outcomes</div>
+              <div className="text-4xl font-bold text-white mb-2 drop-shadow-md">Real</div>
+              <div className="text-base text-white font-semibold drop-shadow-sm">Outcomes</div>
             </div>
           </div>
         </motion.div>
