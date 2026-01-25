@@ -238,13 +238,16 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {leaders.map((leader, index) => (
-              <motion.div
+              <Link
                 key={leader.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-6 border border-[#4729A3]/10 hover:shadow-xl transition-all duration-300"
+                to={createPageUrl(`LeaderProfile?id=${leader.id}`)}
               >
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white rounded-2xl p-6 border border-[#4729A3]/10 hover:shadow-xl hover:border-[#4729A3]/30 transition-all duration-300 cursor-pointer"
+                >
                 <div className="flex items-center gap-4 mb-4">
                   <div className="relative">
                     {leader.profile_photo ? (
@@ -274,10 +277,11 @@ export default function Home() {
                     <p className="text-2xl font-bold text-emerald-600">{leader.issues_resolved || 0}</p>
                     <p className="text-xs text-gray-500">Issues Resolved</p>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                  </div>
+                  </motion.div>
+                  </Link>
+                  ))}
+                  </div>
         </section>
       )}
 
