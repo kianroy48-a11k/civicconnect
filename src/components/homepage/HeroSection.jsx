@@ -127,8 +127,13 @@ export default function HeroSection({ stats }) {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to={createPageUrl('IssueMap')}>
+            <Link to={createPageUrl('ReportIssue')}>
               <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all">
+                Report an Issue
+              </Button>
+            </Link>
+            <Link to={createPageUrl('IssueMap')}>
+              <Button variant="outline" className="border-2 border-slate-300 dark:border-slate-600 px-8 py-6 text-lg rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
                 Track an Issue in My Area
               </Button>
             </Link>
