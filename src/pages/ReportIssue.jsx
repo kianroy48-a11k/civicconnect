@@ -477,14 +477,15 @@ export default function ReportIssue() {
                     />
                   </div>
 
-                  <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-800 rounded-xl">
+                  <div className="flex items-center justify-between p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl border-2 border-blue-200 dark:border-blue-800 shadow-md">
                     <div>
-                      <p className="font-medium text-gray-700 dark:text-slate-200">Report Anonymously</p>
-                      <p className="text-sm text-gray-500 dark:text-slate-400">Your identity will be hidden</p>
+                      <p className="font-bold text-lg text-slate-900 dark:text-white">Report Anonymously</p>
+                      <p className="text-sm text-slate-700 dark:text-slate-300 font-medium">Your identity will be hidden</p>
                     </div>
                     <Switch
                       checked={formData.is_anonymous}
                       onCheckedChange={(checked) => setFormData(prev => ({ ...prev, is_anonymous: checked }))}
+                      className="scale-125"
                     />
                   </div>
                 </div>
