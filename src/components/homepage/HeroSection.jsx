@@ -134,16 +134,16 @@ export default function HeroSection({ stats }) {
           {/* Location Detector */}
           <div className="flex flex-col items-center justify-center gap-4 mb-8">
             {location ? (
-              <div className="flex items-center gap-3 bg-white dark:bg-slate-800 rounded-xl px-6 py-3 shadow-md">
-                <MapPin className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                <span className="text-slate-900 dark:text-white font-medium">
+              <div className="flex items-center gap-3 bg-gradient-to-r from-blue-50 to-slate-50 dark:from-blue-900/30 dark:to-slate-800 rounded-xl px-6 py-3 shadow-md border-2 border-blue-600 dark:border-blue-500">
+                <MapPin className="w-5 h-5 text-blue-600 dark:text-blue-400 font-bold" />
+                <span className="text-slate-900 dark:text-white font-bold text-lg">
                   {location.city}{location.state ? `, ${location.state}` : ''}
                 </span>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setLocation(null)}
-                  className="text-xs text-slate-500 hover:text-slate-700"
+                  className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/50 font-semibold"
                 >
                   Change
                 </Button>
@@ -152,7 +152,7 @@ export default function HeroSection({ stats }) {
               <Button
                 onClick={detectLocation}
                 disabled={locationLoading}
-                className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700 border-2 border-slate-300 dark:border-slate-600 px-6 py-6 text-base rounded-xl shadow-lg"
+                className="bg-blue-600 hover:bg-blue-700 text-white border-2 border-blue-700 dark:border-blue-500 px-8 py-6 text-base rounded-xl shadow-lg hover:shadow-xl font-semibold"
               >
                 {locationLoading ? (
                   <>
