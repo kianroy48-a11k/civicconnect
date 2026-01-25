@@ -74,10 +74,10 @@ export default function LeaderProfile() {
         comment: ratingComment
       });
 
-      // Update leader's aura
+      // Update leader's aura (average of all ratings)
       const newRatingSum = (leader.rating_sum || 0) + rating[0];
       const newTotalRatings = (leader.total_ratings || 0) + 1;
-      const newAura = Math.round((newRatingSum / newTotalRatings) * 10);
+      const newAura = Math.round(newRatingSum / newTotalRatings);
 
       await base44.entities.Leader.update(leaderId, {
         rating_sum: newRatingSum,
@@ -221,10 +221,10 @@ export default function LeaderProfile() {
               You have already rated this leader.
             </p>
           ) : showRatingForm ? (
-            <div className="space-y-4">
+            <div className="space-y-4 bg-gradient-to-br from-[#4729A3]/5 to-[#8B70DB]/5 p-6 rounded-xl border-2 border-[#4729A3]/20">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Rating: <span className={cn(
+                  Aura Rating: <span className={cn(
                     "font-bold text-lg",
                     rating[0] > 0 ? "text-emerald-600" : rating[0] < 0 ? "text-red-600" : "text-gray-500"
                   )}>
@@ -232,17 +232,26 @@ export default function LeaderProfile() {
                   </span>
                 </label>
                 <div className="flex items-center gap-4">
-                  <span className="text-red-500 font-medium">-10</span>
+                  <div className="text-center">
+                    <span className="text-red-500 font-bold text-lg">-100</span>
+                    <p className="text-xs text-gray-500">Poor</p>
+                  </div>
                   <Slider
                     value={rating}
                     onValueChange={setRating}
-                    min={-10}
-                    max={10}
-                    step={1}
+                    min={-100}
+                    max={100}
+                    step={5}
                     className="flex-1"
                   />
-                  <span className="text-emerald-500 font-medium">+10</span>
+                  <div className="text-center">
+                    <span className="text-emerald-500 font-bold text-lg">+100</span>
+                    <p className="text-xs text-gray-500">Excellent</p>
+                  </div>
                 </div>
+                <p className="text-xs text-gray-500 mt-2">
+                  💡 Aura reflects aggregated citizen feedback and service performance
+                </p>
               </div>
               
               <Textarea

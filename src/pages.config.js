@@ -1,21 +1,21 @@
-import Home from './pages/Home';
-import ReportIssue from './pages/ReportIssue';
-import IssueMap from './pages/IssueMap';
-import IssueDetail from './pages/IssueDetail';
-import Leaderboard from './pages/Leaderboard';
-import LeaderProfile from './pages/LeaderProfile';
 import CivicPulse from './pages/CivicPulse';
+import Home from './pages/Home';
+import IssueDetail from './pages/IssueDetail';
+import IssueMap from './pages/IssueMap';
+import LeaderProfile from './pages/LeaderProfile';
+import Leaderboard from './pages/Leaderboard';
+import ReportIssue from './pages/ReportIssue';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
-    "Home": Home,
-    "ReportIssue": ReportIssue,
-    "IssueMap": IssueMap,
-    "IssueDetail": IssueDetail,
-    "Leaderboard": Leaderboard,
-    "LeaderProfile": LeaderProfile,
     "CivicPulse": CivicPulse,
+    "Home": Home,
+    "IssueDetail": IssueDetail,
+    "IssueMap": IssueMap,
+    "LeaderProfile": LeaderProfile,
+    "Leaderboard": Leaderboard,
+    "ReportIssue": ReportIssue,
 }
 
 export const pagesConfig = {
