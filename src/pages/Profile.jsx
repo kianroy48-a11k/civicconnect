@@ -55,7 +55,7 @@ export default function Profile() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-[#4729A3]" />
+        <Loader2 className="w-8 h-8 animate-spin text-emerald-700" />
       </div>
     );
   }
@@ -67,7 +67,7 @@ export default function Profile() {
           <AlertTriangle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
           <h2 className="text-xl font-semibold text-gray-700 mb-2">Please Log In</h2>
           <p className="text-gray-500 mb-4">You need to be logged in to view your profile.</p>
-          <Button onClick={() => base44.auth.redirectToLogin()} className="bg-[#4729A3]">
+          <Button onClick={() => base44.auth.redirectToLogin()} className="bg-emerald-700 hover:bg-emerald-800">
             Log In
           </Button>
         </div>
@@ -92,23 +92,23 @@ export default function Profile() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#EEEBFA] to-white py-8">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-white py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Profile Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-3xl shadow-lg p-8 mb-8 border border-[#4729A3]/10"
+          className="bg-white rounded-3xl shadow-lg p-8 mb-8 border border-emerald-200/50"
         >
           <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-            <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-[#4729A3] to-[#8B70DB] flex items-center justify-center text-white text-3xl font-bold shadow-lg">
+            <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-emerald-700 to-emerald-500 flex items-center justify-center text-white text-3xl font-bold shadow-lg">
               {user.full_name?.charAt(0) || user.email?.charAt(0)}
             </div>
             <div className="flex-1 text-center md:text-left">
-              <h1 className="text-3xl font-bold text-[#29136C] mb-2">{user.full_name || 'User'}</h1>
+              <h1 className="text-3xl font-bold text-emerald-950 mb-2">{user.full_name || 'User'}</h1>
               <p className="text-gray-500 mb-4">{user.email}</p>
               <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                <span className="px-3 py-1 bg-[#4729A3]/10 text-[#4729A3] rounded-full text-sm font-medium">
+                <span className="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium">
                   {user.role === 'admin' ? '👑 Admin' : '👤 Citizen'}
                 </span>
               </div>
@@ -118,38 +118,38 @@ export default function Profile() {
           {/* Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8 pt-8 border-t border-gray-100">
             <div className="text-center">
-              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mx-auto mb-2">
-                <MapPin className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center mx-auto mb-2">
+                <MapPin className="w-6 h-6 text-emerald-600" />
               </div>
-              <p className="text-2xl font-bold text-[#29136C]">{stats.reported}</p>
+              <p className="text-2xl font-bold text-emerald-950">{stats.reported}</p>
               <p className="text-sm text-gray-500">Reported</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center mx-auto mb-2">
                 <CheckCircle className="w-6 h-6 text-emerald-600" />
               </div>
-              <p className="text-2xl font-bold text-[#29136C]">{stats.resolved}</p>
+              <p className="text-2xl font-bold text-emerald-950">{stats.resolved}</p>
               <p className="text-sm text-gray-500">Resolved</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mx-auto mb-2">
                 <Clock className="w-6 h-6 text-amber-600" />
               </div>
-              <p className="text-2xl font-bold text-[#29136C]">{stats.inProgress}</p>
+              <p className="text-2xl font-bold text-emerald-950">{stats.inProgress}</p>
               <p className="text-sm text-gray-500">In Progress</p>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mx-auto mb-2">
-                <Repeat2 className="w-6 h-6 text-purple-600" />
+              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center mx-auto mb-2">
+                <Repeat2 className="w-6 h-6 text-emerald-600" />
               </div>
-              <p className="text-2xl font-bold text-[#29136C]">{stats.reposts}</p>
+              <p className="text-2xl font-bold text-emerald-950">{stats.reposts}</p>
               <p className="text-sm text-gray-500">Reposts</p>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center mx-auto mb-2">
-                <ThumbsUp className="w-6 h-6 text-indigo-600" />
+              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center mx-auto mb-2">
+                <ThumbsUp className="w-6 h-6 text-emerald-600" />
               </div>
-              <p className="text-2xl font-bold text-[#29136C]">{stats.verifications}</p>
+              <p className="text-2xl font-bold text-emerald-950">{stats.verifications}</p>
               <p className="text-sm text-gray-500">Verified</p>
             </div>
           </div>
@@ -157,14 +157,14 @@ export default function Profile() {
 
         {/* Tabs */}
         <Tabs defaultValue="reported" className="space-y-6">
-          <TabsList className="bg-white border border-[#4729A3]/10 p-1">
-            <TabsTrigger value="reported" className="data-[state=active]:bg-[#4729A3] data-[state=active]:text-white">
+          <TabsList className="bg-white border border-emerald-200/50 p-1">
+            <TabsTrigger value="reported" className="data-[state=active]:bg-emerald-700 data-[state=active]:text-white">
               My Reports ({stats.reported})
             </TabsTrigger>
-            <TabsTrigger value="reposts" className="data-[state=active]:bg-[#4729A3] data-[state=active]:text-white">
+            <TabsTrigger value="reposts" className="data-[state=active]:bg-emerald-700 data-[state=active]:text-white">
               Reposts ({stats.reposts})
             </TabsTrigger>
-            <TabsTrigger value="verifications" className="data-[state=active]:bg-[#4729A3] data-[state=active]:text-white">
+            <TabsTrigger value="verifications" className="data-[state=active]:bg-emerald-700 data-[state=active]:text-white">
               Verifications ({stats.verifications})
             </TabsTrigger>
           </TabsList>
@@ -175,7 +175,7 @@ export default function Profile() {
                 <MapPin className="w-12 h-12 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-500 mb-4">You haven't reported any issues yet.</p>
                 <Link to={createPageUrl('ReportIssue')}>
-                  <Button className="bg-[#4729A3]">Report Your First Issue</Button>
+                  <Button className="bg-emerald-700 hover:bg-emerald-800">Report Your First Issue</Button>
                 </Link>
               </div>
             ) : (
