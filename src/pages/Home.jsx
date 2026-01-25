@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import HeroSection from '../components/homepage/HeroSection';
-import ProblemProgressSection from '../components/homepage/ProblemProgressSection';
 import LiveMapSection from '../components/homepage/LiveMapSection';
 import CommunityPressureSection from '../components/homepage/CommunityPressureSection';
 import AccountabilityDashboard from '../components/homepage/AccountabilityDashboard';
