@@ -472,6 +472,51 @@ export default function IssueDetail() {
               </motion.div>
             )}
 
+            {/* Contract Status */}
+            {issue.contract_activated && (
+              <div className={cn("mt-6 p-4 rounded-xl border", getContractColor(contractStatus))}>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    {isBreach ? (
+                      <AlertCircle className="w-5 h-5" />
+                    ) : contractStatus === 'Resolved' ? (
+                      <CheckCircle2 className="w-5 h-5" />
+                    ) : (
+                      <Clock className="w-5 h-5" />
+                    )}
+                    {contractStatus === 'Contract Breached' ? 'Deadline Missed' : contractStatus}
+                  </h3>
+                  {issue.resolution_deadline && (
+                    <span className="text-sm opacity-75">by {format(new Date(issue.resolution_deadline), 'MMM d, yyyy')}</span>
+                  )}
+                </div>
+                {canResolve && (
+                  <Button
+                    size="sm"
+                    onClick={() => setShowResolveForm(true)}
+                    className="mt-3 w-full"
+                  >
+                    Mark as Resolved
+                  </Button>
+                )}
+                {showResolveForm && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="mt-3 p-3 bg-white/50 rounded-lg border border-current/20"
+                  >
+                    <p className="text-sm mb-3">Mark this issue as resolved before the deadline?</p>
+                    <div className="flex justify-end gap-2">
+                      <Button variant="ghost" size="sm" onClick={() => setShowResolveForm(false)}>Cancel</Button>
+                      <Button size="sm" onClick={() => resolveContractMutation.mutate()} disabled={resolveContractMutation.isPending} className="bg-green-600">
+                        {resolveContractMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Confirm'}
+                      </Button>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            )}
+
             {/* Assigned Leader */}
             {leader ? (
               <div className="mt-6 p-4 bg-[#4729A3]/5 rounded-xl border border-[#4729A3]/20">
