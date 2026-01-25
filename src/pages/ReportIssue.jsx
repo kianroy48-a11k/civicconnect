@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
+import ImpactPredictor from '../components/ImpactPredictor/ImpactPredictor';
 import { 
   Camera, 
   MapPin, 
@@ -440,6 +441,16 @@ export default function ReportIssue() {
               >
                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Final Details</h2>
                 <p className="text-gray-500 dark:text-slate-400 mb-6">Add a title and description</p>
+
+                {/* Impact Predictor */}
+                <div className="mb-6">
+                  <ImpactPredictor
+                    category={formData.category}
+                    severity={formData.severity}
+                    ward={formData.ward}
+                    latitude={formData.latitude}
+                  />
+                </div>
 
                 <div className="space-y-4">
                   <div>
