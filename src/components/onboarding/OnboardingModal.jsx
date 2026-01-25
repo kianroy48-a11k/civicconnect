@@ -502,8 +502,8 @@ export default function OnboardingModal({ isOpen, onClose }) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-hidden p-0">
-        <div className="flex flex-col h-full">
+      <DialogContent className="max-w-2xl max-h-[90vh] p-0 flex flex-col">
+        <div className="flex flex-col max-h-[90vh]">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#29136C] to-[#4729A3] p-6 text-white">
             <div className="flex items-center justify-between mb-4">
