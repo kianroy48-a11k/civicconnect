@@ -1,0 +1,21 @@
+{
+  "name": "Repost",
+  "type": "object",
+  "properties": {
+    "issue_id": {
+      "type": "string",
+      "description": "ID of the reposted issue"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "Email of user who reposted"
+    },
+    "comment": {
+      "type": "string",
+      "description": "Optional comment on repost"
+    }
+  },
+  "required": [
+    "issue_id"
+  ]
+}

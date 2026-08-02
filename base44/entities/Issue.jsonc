@@ -1,0 +1,161 @@
+{
+  "name": "Issue",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Brief title of the issue"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Garbage",
+        "Water",
+        "Road",
+        "Safety",
+        "Parks",
+        "Other"
+      ],
+      "description": "Issue category"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the issue"
+    },
+    "photo": {
+      "type": "string",
+      "description": "URL of uploaded photo"
+    },
+    "meme": {
+      "type": "string",
+      "description": "Optional meme/GIF URL"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "Location latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "description": "Location longitude"
+    },
+    "address": {
+      "type": "string",
+      "description": "Human-readable address"
+    },
+    "ward": {
+      "type": "string",
+      "description": "Ward or area name"
+    },
+    "city": {
+      "type": "string",
+      "description": "City name"
+    },
+    "state": {
+      "type": "string",
+      "description": "State name"
+    },
+    "locality": {
+      "type": "string",
+      "description": "Specific locality/area"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specific tags like Pothole, Overflow, etc."
+    },
+    "tagged_leader_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Auto-tagged or manually tagged leader IDs",
+      "default": []
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "default": "Medium"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Reported",
+        "Verified",
+        "In Progress",
+        "Resolved"
+      ],
+      "default": "Reported"
+    },
+    "is_anonymous": {
+      "type": "boolean",
+      "default": false
+    },
+    "reporter_name": {
+      "type": "string",
+      "description": "Reporter display name if not anonymous"
+    },
+    "sla_deadline": {
+      "type": "string",
+      "format": "date-time",
+      "description": "48hr SLA deadline"
+    },
+    "resolved_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "vouch_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of community verifications"
+    },
+    "repost_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of reposts"
+    },
+    "civic_pulse_score": {
+      "type": "number",
+      "default": 0,
+      "description": "Calculated trending score"
+    },
+    "assigned_leader_id": {
+      "type": "string",
+      "description": "ID of assigned leader/official"
+    },
+    "contract_status": {
+      "type": "string",
+      "enum": [
+        "Reported",
+        "Accepted",
+        "Resolved",
+        "Contract Breached"
+      ],
+      "default": "Reported",
+      "description": "Smart contract accountability status"
+    },
+    "contract_activated": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the contract has been activated by leader"
+    },
+    "resolution_deadline": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Deadline for contract resolution"
+    }
+  },
+  "required": [
+    "title",
+    "category",
+    "latitude",
+    "longitude",
+    "severity"
+  ]
+}

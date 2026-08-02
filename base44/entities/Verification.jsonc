@@ -1,0 +1,33 @@
+{
+  "name": "Verification",
+  "type": "object",
+  "properties": {
+    "issue_id": {
+      "type": "string",
+      "description": "ID of the issue being verified"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "Email of verifying user"
+    },
+    "confirmation_type": {
+      "type": "string",
+      "enum": [
+        "Exists",
+        "Resolved"
+      ],
+      "description": "Type of verification"
+    },
+    "photo_evidence": {
+      "type": "string",
+      "description": "Optional photo URL"
+    },
+    "comment": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "issue_id",
+    "confirmation_type"
+  ]
+}

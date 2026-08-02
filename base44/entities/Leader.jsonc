@@ -1,0 +1,58 @@
+{
+  "name": "Leader",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Official's name"
+    },
+    "title": {
+      "type": "string",
+      "description": "Official title/position"
+    },
+    "ward": {
+      "type": "string",
+      "description": "Assigned ward or area"
+    },
+    "profile_photo": {
+      "type": "string",
+      "description": "Profile photo URL"
+    },
+    "aura_score": {
+      "type": "number",
+      "default": 0,
+      "description": "Aggregate Aura score (-100 to +100)"
+    },
+    "total_ratings": {
+      "type": "number",
+      "default": 0
+    },
+    "rating_sum": {
+      "type": "number",
+      "default": 0
+    },
+    "issues_resolved": {
+      "type": "number",
+      "default": 0
+    },
+    "issues_assigned": {
+      "type": "number",
+      "default": 0
+    },
+    "sla_compliance_rate": {
+      "type": "number",
+      "default": 100,
+      "description": "Percentage of issues resolved within SLA"
+    },
+    "avg_resolution_time": {
+      "type": "number",
+      "default": 0,
+      "description": "Average hours to resolve"
+    }
+  },
+  "required": [
+    "name",
+    "title",
+    "ward"
+  ]
+}

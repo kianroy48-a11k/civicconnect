@@ -1,0 +1,29 @@
+{
+  "name": "LeaderRating",
+  "type": "object",
+  "properties": {
+    "leader_id": {
+      "type": "string",
+      "description": "ID of the leader being rated"
+    },
+    "issue_id": {
+      "type": "string",
+      "description": "Related verified issue"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "Rater's email (for duplicate prevention)"
+    },
+    "rating": {
+      "type": "number",
+      "description": "Rating value (-100 to +100)"
+    },
+    "comment": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "leader_id",
+    "rating"
+  ]
+}
